@@ -1,0 +1,19 @@
+<div class="background font-color">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center center">
+        <h1 rel="preload" as="fetch">{{ "error_guards.access_denied" | translate }}</h1>
+        <br><br>
+        <span rel="preload" as="fetch">{{ "error_guards.no_permissions" | translate }}</span>
+        <br>
+        <span rel="preload" as="fetch">{{ "error_guards.please" | translate }}</span>
+        <br><br>
+        <h6 rel="preload" as="fetch" *ngIf="time >= 0" [class.green]="time >= 10" [class.orange]="time > 3 && time < 10"
+          [class.red]="time >= 0 && time <= 3">
+          {{ "error_guards.you_will" | translate }} {{ time }} {{ "error_guards.seconds" | translate }}"</h6>
+        <h6 *ngIf="time < 0">{{ "error_guards.redirecting" | translate }}</h6>
+        <img rel="preload" src="../../../assets/images/Logo Hunter (rosa).jpg" alt="Hunter's logo" as="image">
+      </div>
+    </div>
+  </div>
+</div>

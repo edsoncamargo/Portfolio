@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center margin-top">EXPERIÊNCIAS</h1>
+      <hr class="line-title-white">
+      <br>
+    </div>
+    <div *ngIf="!loading" class="col-lg-3 col-md-4 col-sm-12">
+      <button (click)="changeModal(false)" class="btn" data-toggle="modal"
+        data-target="#addTimelineExperience">ADICIONAR
+        <i class="fas fa-plus icon"></i></button>
+    </div>
+  </div>
+  <br *ngIf="!loading">
+
+  <div *ngIf="loading" class="text-center">
+    <app-lds-facebook></app-lds-facebook>
+  </div>
+
+  <div *ngIf="!loading" class="row font-black">
+    <div class="col-12">
+      <div *ngFor="let timeline of timelines" class="card">
+        <div class="card-body">
+          <i (click)="getExperience(timeline.id)" class="far fa-trash-alt red cursor-pointer float-right tools"
+            data-toggle="modal" data-target="#addTimelineExperience"></i>
+          <i (click)="getExperience(timeline.id)" (click)="changeModal(true)" data-toggle="modal"
+            data-target="#addTimelineExperience" class="fas fa-pen dark-blue cursor-pointer float-right tools"></i>
+          <span>{{ timeline.date }} <br> {{ timeline.company }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline add modal -->
+  <div class="modal fade font-black" id="addTimelineExperience" tabindex="-1" role="dialog"
+    aria-labelledby="addTimelineExperience" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTimelineExperienceLabel">{{ modalTitle }}</h5>
+          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+        </div>
+
+        <div class="card-body">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pt-tab" data-toggle="tab" href="#pt" role="tab" aria-controls="pt"
+                aria-selected="true">
+                <img rel="preload" src="../../../assets/images/brasil.png" alt="" class="br-flag" as="image">
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="en-tab" data-toggle="tab" href="#en" role="tab" aria-controls="en"
+                aria-selected="false">
+                <img rel="preload" src="../../../assets/images/eua.png" alt="" class="eua-flag" as="image">
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="images-tab" data-toggle="tab" href="#image" role="tab" aria-controls="images"
+                aria-selected="false">Foto de perfil &nbsp;&nbsp;
+                <i class="fas fa-images"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="pt" role="tabpanel" aria-labelledby="pt-tab">
+              <br>
+              <form>
+                <div class="form-group">
+                  <label>Data </label>
+                  <input [(ngModel)]="date" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control input-modify" placeholder="Data">
+                </div>
+                <div class="form-group">
+                  <label>Empresa </label>
+                  <input [(ngModel)]="company" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control input-modify" placeholder="Empresa">
+                </div>
+                <div class="form-group">
+                  <label>Descrição </label>
+                  <input [(ngModel)]="description" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control input-modify" placeholder="Descrição">
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade show" id="en" role="tabpanel" aria-labelledby="pt-tab">
+              <br>
+              <form>
+                <div class="form-group">
+                  <label>Data </label>
+                  <input [(ngModel)]="dateEn" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control input-modify" placeholder="Data">
+                </div>
+                <div class="form-group">
+                  <label>Empresa </label>
+                  <input [(ngModel)]="companyEn" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control input-modify" placeholder="Empresa">
+                </div>
+                <div class="form-group">
+                  <label>Descrição </label>
+                  <input [(ngModel)]="descriptionEn" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control input-modify" placeholder="Descrição">
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade show" id="image" role="tabpanel" aria-labelledby="pt-tab">
+              <br>
+              <form>
+                <div class="form-group">
+                  <label>Imagem da empresa </label>
+                  <input [(ngModel)]="companyImage" [ngModelOptions]="{standalone: true}" type="file"
+                    class="form-control input-modify">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!isEdit" class="modal-footer">
+          <button (click)="add()" type="button" class="btn" data-dismiss="modal">ADICIONAR</button>
+        </div>
+        <div *ngIf="isEdit" class="modal-footer">
+          <button (click)="edit()" type="button" class="btn" data-dismiss="modal">SALVAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Timeline add modal -->
+
+</div>

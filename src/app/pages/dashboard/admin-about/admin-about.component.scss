@@ -1,0 +1,98 @@
+.margin-top {
+    margin-top: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    -webkit-box-shadow: 5px 7px 14px -7px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 5px 7px 14px -7px rgba(0, 0, 0, 0.40);
+    box-shadow: 5px 7px 14px -7px rgba(0, 0, 0, 0.40);
+}
+
+img {
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    pointer-events: none;
+}
+
+@media only screen and (max-width: 767PX) {
+    img {
+        border-radius: 10px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+}
+
+h1 {
+    font-weight: bold;
+}
+
+input.input-modify,
+textarea.input-modify {
+    border-top: transparent !important;
+    border-left: transparent !important;
+    border-right: transparent !important;
+    border-radius: none !important;
+    resize: none;
+}
+
+input:focus,
+textarea.input-modify {
+    border-color: #CED4DA !important;
+    box-shadow: 1px 0px 10px var(--dark-blue); // outline: 5px solid var(--pink);
+}
+
+input.input-modify:focus,
+textarea.input-modify {
+    box-shadow: 0px 1px 0px var(--dark-blue);
+}
+
+input.append-modify {
+    border-bottom-right-radius: 0px !important;
+}
+
+textarea.input-modify {
+    height: 120px;
+}
+
+span.input-group-text {
+    background: var(--pink);
+}
+
+.btn {
+    border-color: none !important;
+    background-color: rgba(231, 29, 54, 1);
+    color: #fff;
+    width: 100%;
+    border-radius: 25px;
+}
+
+.btn:hover {
+    color: #fff !important;
+    background-color: rgba(168, 0, 21, 1);
+}
+
+.margin {
+    margin-bottom: 10px !important;
+}
+
+.icon {
+    font-size: 1em;
+    float: right;
+    margin-top: 4px;
+    color: #fff;
+}
+
+a.nav-link {
+    color: var(--pink);
+}
+
+.br-flag {
+    width: 20px;
+}
+
+.eua-flag {
+    width: 18.50px;
+}

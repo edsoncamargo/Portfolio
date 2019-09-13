@@ -1,0 +1,73 @@
+.margin-top {
+    margin-top: 20px;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.btn {
+    border-color: none !important;
+    background-color: rgba(231, 29, 54, 1);
+    color: #fff;
+    width: 100%;
+    border-radius: 25px;
+}
+
+.btn:hover {
+    color: #fff !important;
+    background-color: rgba(168, 0, 21, 1);
+}
+
+.dark-blue-bg {
+    background: var(--dark-blue) !important;
+}
+
+.pink-bg {
+    background: var(--pink) !important;
+}
+
+.font-black {
+    color: #000 !important;
+}
+
+.btn.font-black {
+    font-weight: 600 !important;
+}
+
+.icon {
+    font-size: 1em;
+    float: right;
+    margin-top: 4.5px;
+    color: #fff;
+}
+
+.card {
+    height: 50px;
+}
+
+.skills {
+    margin: 10px !important;
+}
+
+.fa-pen {
+    margin-right: 15px;
+}
+
+.icon-size {
+    font-size: 1.5em;
+    margin-top: 5.50px;
+}
+
+.tools {
+    margin-top: 5px;
+}
+
+.modal-content-transparent {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none !important;
+}
+
+.bottom {
+    top: calc(100% - 300px);
+}

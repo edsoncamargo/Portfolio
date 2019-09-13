@@ -1,0 +1,52 @@
+{
+  "global": {
+    "home": "Home",
+    "about": "About",
+    "timeline": "Experiences",
+    "services": "Projects",
+    "contact": "Contact",
+    "skills": "Skills",
+    "name": "Name",
+    "name_plc": "Type your name",
+    "e-mail": "E-mail",
+    "e-mail_plc": "Type you e-mail",
+    "subject": "Subject",
+    "subject_plc": "Type subject",
+    "message": "Message",
+    "message_plc": "Type your message here..."
+  },
+  "titles": {
+    "main": "Portfólio - Edson Camargo Menezes, Desenvolvedor Web"
+  },
+  "home": {
+    "title": "Web Developer"
+  },
+  "about": {
+    "hi_guys": "{{value}}",
+    "informations_one": "{{value}}"
+  },
+  "services": {},
+  "contact": {
+    "contact-me": "Talk to me",
+    "verification": "Verification",
+    "send_message": "Send message"
+  },
+  "footer": {
+    "rights_one": "© 2019 Copyright Edson Camargo Menezes",
+    "rights_two": "All rights reserved."
+  },
+  "error_guards": {
+    "access_denied": "Access Denied!",
+    "no_permissions": "You don't have any permission to access this route.",
+    "please": "Please, make log in to an administrator account to acess.",
+    "you_will": "You'll be redirected to the home in",
+    "seconds": "seconds...",
+    "redirecting": "Redirecting..."
+  },
+  "error": {
+    "not_found": "404 - PAGE NOT FOUND",
+    "page_removed": "The page you are looking for might have been removed,",
+    "unavailable": "name changed or is temporarily unavailable.",
+    "go_home": "GO TO HOMEPAGE"
+  }
+}

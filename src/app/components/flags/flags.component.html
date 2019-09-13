@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="card">
+    <div class="row top">
+      <div class="col-2 offset-1">
+        <img rel="preload" [class.actived]="languageActived != 'pt_BR'" (click)="switchLanguage('pt_BR')"
+          src="../../../assets/images/brasil.png" alt="" class="img cursor-pointer" as="image">
+        <!-- <i *ngIf="languageActived == 'pt_BR'" class="fas fa-sort-up arrow"></i> -->
+      </div>
+      <div class="col-2 offset-1">
+        <img rel="preload" [class.actived]="languageActived != 'en_US'" (click)="switchLanguage('en_US')"
+          src="../../../assets/images/eua.png" alt="" class="img cursor-pointer" as="image">
+        <!-- <i *ngIf="languageActived == 'en_US'" class="fas fa-sort-up arrow"></i> -->
+      </div>
+    </div>
+  </div>
+</div>

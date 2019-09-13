@@ -1,0 +1,196 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center margin-top">PROJETOS</h1>
+      <hr class="line-title-white">
+      <br>
+    </div>
+    <div *ngIf="!loading" class="col-lg-3 col-md-4 col-sm-12">
+      <button (click)="changeEdit(false)" class="btn" data-toggle="modal" data-target="#projectModal">ADICIONAR <i
+          class="fas fa-plus plus"></i></button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center">
+    <app-lds-facebook></app-lds-facebook>
+  </div>
+
+  <div *ngIf="!loading" class="row">
+    <div *ngFor="let project of projects" class="col-lg-6 col-sm-12 font-black">
+      <br>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6 truncate">
+              {{ project.title }}
+            </div>
+            <div class="col-6">
+              <i (click)="getProject(project, false)"
+                class="far fa-trash-alt tools red cursor-pointer jello-horizontal float-right" data-toggle="modal"
+                data-target=".bd-example-modal-sm"></i>
+              <i (click)="getProject(project, true)"
+                class="fas fa-pen tools margin-right dark-blue cursor-pointer jello-horizontal float-right"
+                data-toggle="modal" data-target="#projectModal"></i>
+            </div>
+          </div>
+        </div>
+        <img rel="preload" class="posts" [src]="project.urlCover | notFoundImage" alt="" as="image">
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <!-- Add post modal -->
+  <div class="modal fade font-black" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="!isEdit" class="modal-title" id="projectModal">Adicionar</h5>
+          <h5 *ngIf="isEdit" class="modal-title" id="projectModal">Editar {{ title }}</h5>
+          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+        </div>
+
+        <div class="modal-body">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pt-tab" data-toggle="tab" href="#pt" role="tab" aria-controls="pt"
+                aria-selected="true">
+                <img rel="preload" src="../../../assets/images/brasil.png" alt="" class="br-flag" as="image">
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="en-tab" data-toggle="tab" href="#en" role="tab" aria-controls="en"
+                aria-selected="false">
+                <img rel="preload" src="../../../assets/images/eua.png" alt="" class="eua-flag" as="image">
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
+                aria-selected="false">Imagens &nbsp;&nbsp;
+                <i class="fas fa-images"></i>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="link"
+                aria-selected="false">Link &nbsp;&nbsp;
+                <i class="fas fa-link"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="pt" role="tabpanel" aria-labelledby="pt-tab">
+              <br>
+              <form>
+                <div class="form-group">
+                  <label>Título</label>
+                  <input [(ngModel)]="title" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control add-modal" placeholder="Título">
+                </div>
+                <div class="form-group">
+                  <label>Descrição</label>
+                  <textarea [(ngModel)]="description" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control add-modal" placeholder="Descrição"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
+              <br>
+              <form>
+                <div class="form-group">
+                  <label>Título</label>
+                  <input [(ngModel)]="titleEn" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control add-modal" placeholder="Título">
+                </div>
+                <div class="form-group">
+                  <label>Descrição</label>
+                  <textarea [(ngModel)]="descriptionEn" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control add-modal" placeholder="Descrição"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+              <br>
+              <form>
+                <div class="form-group">
+                  <label>Adicionar capa</label>
+                  <input (change)="handleFileInput($event)" type="file" class="form-control add-modal file cover"
+                    placeholder="Capa">
+                  <div *ngIf="file">
+                    <br>
+                    <i (click)="removeCover()"
+                      class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></i>
+                    <img rel="preload" [src]="previousCover" alt="" class="posts images cursor-pointer" as="image">
+                    <hr class="image-div">
+                  </div>
+                </div>
+                <br>
+                <div class="form-group">
+                  <label>Adicionar imagem</label>
+                  <input (change)="handleFilesInput($event)" type="file" class="form-control add-modal file"
+                    placeholder="Capa" multiple>
+                  <div *ngIf="previousImages.length > 0">
+                    <br>
+                    <label for="">Preview</label>
+                    <div *ngFor="let image of previousImages; let i = index;">
+                      <i (click)="removeImage(i)"
+                        class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></i>
+                      <img rel="preload" class="posts images cursor-pointer projects" [src]="image" alt="" as="image">
+                    </div>
+                    <hr class="image-div">
+                  </div>
+                </div>
+                <br>
+
+                <!-- Showing images -->
+                <div *ngIf="images && images.length > 0" class="form-groug">
+                  <label>Imagens armazenadas</label>
+                  <div *ngFor="let image of images; let i = index;">
+                    <i (click)="deleteImage(image, i)"
+                      class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></i>
+                    <img rel="preload" class="posts images cursor-pointer" [src]="image.url" alt="" as="image">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab">
+              <br>
+              <form>
+                <div class="form-group">
+                  <label>Url</label>
+                  <input [(ngModel)]="url" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control add-modal" placeholder="Url">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!modalLoading" class="modal-footer">
+          <button *ngIf="!isEdit" (click)="add()" type="button" class="btn">ADICIONAR</button>
+          <button *ngIf="isEdit" (click)="edit()" type="button" class="btn">SALVAR</button>
+        </div>
+
+        <div *ngIf="modalLoading" class="modal-footer">
+          <app-lds-facebook-blue></app-lds-facebook-blue>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete modal project -->
+  <div class="modal fade bd-example-modal-sm bottom" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm bottom">
+      <div class="modal-content modal-content-transparent">
+        <button (click)="deleteProject()" type="button" class="btn delete" data-dismiss="modal">DELETAR</button>
+        <br>
+        <button type="button" class="btn dark-blue-bg" data-dismiss="modal">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+
+</div>

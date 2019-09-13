@@ -1,0 +1,22 @@
+.parallax {
+    height: 200px;
+    background-image: url("../../../assets/images/Keyboard.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.margin-top {
+    padding-top: 90px;
+}
+
+.icon {
+    font-size: 3em;
+    color: #fff;
+}
+
+.icon:hover {
+    color: var(--pink);
+    font-size: 3.5em;
+}

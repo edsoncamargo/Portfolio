@@ -1,0 +1,228 @@
+h3 {
+    font-weight: 600;
+}
+
+.img-company {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+$color: var(--dark-blue);
+
+$gutter: 3rem;
+$gap: 2rem;
+
+$breakpoints: (small-min: 'min-width: 0px',
+small-max: 'max-width: 767px',
+medium-min: 'min-width: 768px',
+medium-max: 'max-width: 1024px',
+large-min: 'min-width: 1025px'
+);
+
+/**
+   * Mixins
+   */
+
+@mixin mq-small-only {
+    @media only screen and (map-get($breakpoints, small-max)) {
+        @content;
+    }
+}
+
+@mixin mq-medium {
+    @media only screen and (map-get($breakpoints, medium-min)) {
+        @content;
+    }
+}
+
+@mixin mq-large {
+    @media only screen and (map-get($breakpoints, large-min)) {
+        @content;
+    }
+}
+
+@mixin children-margin($margin) {
+    >*:not(:last-child) {
+        margin-bottom: $margin;
+    }
+}
+
+/**
+   * Base
+   */
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+
+    // margin: 0;
+    // Pseudo
+    &::before,
+    &::after {
+        box-sizing: inherit;
+    }
+}
+
+html {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    background-color: #eee;
+    color: #222831;
+}
+
+body {
+    font-size: 1.6rem;
+
+    // MQ
+    @include mq-medium {
+        font-size: 1.8rem;
+    }
+
+    @include mq-large {
+        font-size: 2rem;
+    }
+}
+
+/**
+   * Timeline
+   */
+
+.timeline-wrap {
+    max-width: 1000px;
+    // padding: 5rem 2.5rem;
+    margin: 0 auto;
+}
+
+.timeline {
+    @include children-margin($gutter);
+
+    position: relative; // for pseudo
+    list-style-type: none;
+    padding-bottom: $gutter;
+
+    // Pseudo
+    &::before {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        background-color: $color;
+        color: #fff;
+        padding: 10px 40px;
+        margin-bottom: $gutter;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+
+        // MQ
+        @include mq-medium {
+            border-radius: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    &::after {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 2px;
+        background-color: #393e46;
+        opacity: 0.15;
+
+        // MQ
+        @include mq-medium {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    // HTML
+    time {
+        display: inline-block;
+        font-weight: 700;
+        color: $color;
+        padding-top: 4px;
+    }
+
+    // Elements
+    &__entry {
+        @include children-margin($gap);
+
+        position: relative; // for pseudo
+
+        // MQ
+        @include mq-small-only {
+            padding-left: $gutter;
+        }
+
+        @include mq-medium {
+            width: 50%;
+
+            // Pseudo
+            &:nth-of-type(odd) {
+                text-align: right;
+                padding-right: $gutter;
+                margin-right: auto;
+
+                // Pseudo
+                &::before {
+                    left: auto;
+                    right: -8px;
+                }
+
+                &::after {
+                    left: auto;
+                    right: 0;
+                }
+            }
+
+            &:nth-of-type(even) {
+                padding-left: $gutter;
+                margin-left: auto;
+            }
+        }
+
+        // Pseudo
+        &::before,
+        &::after {
+            content: ' ';
+            position: absolute;
+            margin-top: 1rem;
+        }
+
+        &::before {
+            width: 16px;
+            height: 16px;
+            top: 1px;
+            left: -8px;
+            z-index: 2;
+            background-color: #fff;
+            border: 3px solid $color;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        &::after {
+            width: 35px;
+            height: 2px;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background-color: $color;
+        }
+    }
+
+    &__headline {
+        font-size: 3rem;
+    }
+
+    &__list {
+        display: inline-block;
+        list-style-position: centred;
+        list-style-type: disclosure-closed;
+        line-height: 1.6;
+    }
+}

@@ -1,0 +1,42 @@
+<!-- TITLE -->
+<div class="row">
+  <div class="col-12">
+    <br>
+    <h3 rel="preload" as="fetch" class="text-center margin-top">
+      {{ "global.timeline" | translate | uppercase }}</h3>
+    <br>
+  </div>
+</div>
+<!-- TITLE -->
+
+<div *ngIf="loading" class="text-center">
+  <app-lds-facebook-blue></app-lds-facebook-blue>
+</div>
+
+<!-- CONTENT -->
+<div *ngIf="!loading" class="timeline-wrap">
+  <ol class="timeline">
+    <li *ngFor="let timeline of timelines" class="timeline__entry">
+      <time *ngIf="getLanguage() == 'pt_BR'">
+        {{ timeline.date }}
+      </time>
+      <time *ngIf="getLanguage() == 'en_US'">
+        {{ timeline.dateEn }}
+      </time>
+      <h3 *ngIf="getLanguage() == 'pt_BR'" class="timeline-headline">
+        {{ timeline.company }}
+      </h3>
+      <h3 *ngIf="getLanguage() == 'en_US'" class="timeline-headline">
+        {{ timeline.companyEn }}
+      </h3>
+      <img rel="preload" src="../../../../assets/images/CIT.jpg" class="img-company" alt="" as="image">
+      <span *ngIf="getLanguage() == 'pt_BR'">
+        {{ timeline.description }}
+      </span>
+      <span *ngIf="getLanguage() == 'en_US'">
+        {{ timeline.descriptionEn }}
+      </span>
+    </li>
+  </ol>
+</div>
+<!-- CONTENT -->

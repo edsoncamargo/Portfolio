@@ -1,0 +1,28 @@
+.background {
+    background: black;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.img-lg-md {
+    width: 40%;
+    margin: auto;
+}
+
+.img-sm {
+    width: 100%;
+    margin: auto;
+}
+
+.btn {
+    color: #fff;
+    font-weight: 500;
+    width: 200px;
+    background-color: rgba(231, 29, 54, 1);
+    border-top-right-radius: 100px !important;
+    border-bottom-left-radius: 100px !important;
+}
+
+.btn:hover {
+    background: rgba(168, 0, 21, 1)
+}

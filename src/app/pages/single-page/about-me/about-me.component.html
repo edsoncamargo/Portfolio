@@ -1,0 +1,49 @@
+<div class="light-gray-bg costumize-bg font">
+  <div class="container outer">
+    <div class="row">
+      <div class="col-12">
+        <h1 rel="preload" as="fetch" class="text-center pink margin-top">{{ "global.about" | translate | uppercase }}</h1>
+        <hr class="line-title">
+        <br>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="row text-center">
+      <div class="col-12">
+        <app-lds-facebook-blue></app-lds-facebook-blue>
+      </div>
+    </div>
+
+    <div *ngIf="!loading" class="row">
+      <div class="col-12">
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img [src]="url" class="card-img" alt="Edson Camargo Menezes, dono do portfólio." as="image">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div *ngIf="language == 'pt_BR'" class="card-body">
+                  <h1 [translate]="'about.hi_guys'" [translateParams]="{value: titleBR}" class="hi"></h1>
+                  <br>
+                  <span [translate]="'about.informations_one'" [translateParams]="{value: descriptionBR}">
+                  </span>
+                </div>
+                <div *ngIf="language == 'en_US'" class="card-body">
+                  <h1 [translate]="'about.hi_guys'" [translateParams]="{value: titleEN}" class="hi"></h1>
+                  <br>
+                  <span [translate]="'about.informations_one'" [translateParams]="{value: descriptionEN}">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-timeline></app-timeline>
+
+  </div>
+</div>
+<app-light-rounded></app-light-rounded>

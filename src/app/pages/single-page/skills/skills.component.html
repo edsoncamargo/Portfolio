@@ -1,0 +1,32 @@
+<div class="dark-blue-bg font">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <h1 rel="preload" as="fetch" class="text-center font-color margin-top">{{ "global.skills" | translate | uppercase }}</h1>
+        <hr class="line-title-white">
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="text-center">
+      <app-lds-facebook></app-lds-facebook>
+    </div>
+
+    <div *ngIf="!loading" class="row">
+      <div *ngFor="let skill of skills" class="col-lg-4 col-md-4 col-6">
+        <br>
+        <div data-toggle="tooltip" data-placement="top" [title]="skill.skill">
+          <h5><i [ngClass]="skill.classes | skillIcons" class="icon-shadow"
+              [style.color]="skill.classes | skillColors"></i>
+            {{ skill.skill | ellipsis:'8' }}</h5>
+          <div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width': skill['percent']}"
+              [attr.aria-valuenow]="skill.value" aria-valuemin="0" aria-valuemax="100"><span
+                class="font-black">{{ skill.value }}%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-dark-rounded class="margin-bottom"></app-dark-rounded>

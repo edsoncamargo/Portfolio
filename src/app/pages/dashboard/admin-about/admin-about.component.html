@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center margin-top">SOBRE</h1>
+      <hr class="line-title-white">
+      <br>
+    </div>
+  </div>
+
+  <div *ngIf="loading == true" class="text-center">
+    <app-lds-facebook></app-lds-facebook>
+  </div>
+
+  <div *ngIf="loading == false" class="row">
+    <div class="col-12">
+      <div class="card mb-3 font-black">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img rel="preload" class="card-img" [src]="url" alt="" as="image">
+          </div>
+          <div *ngIf="activeEdition == false" class="col-md-8">
+            <div class="card-body">
+              <i (click)="activeAboutEdit()" class="fas fa-pen dark-blue cursor-pointer float-right tools"></i>
+              <div class="card-body">
+                <h1 [translate]="'about.hi_guys'" [translateParams]="{value: titleBR}" class="hi"></h1>
+                <br>
+                <span [translate]="'about.informations_one'" [translateParams]="{value: descriptionBR}">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="activeEdition == true" class="col-md-8">
+            <div class="card-body">
+              <i (click)="activeAboutEdit()" class="fas fa-pencil-ruler cursor-pointer float-right tools"></i>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="pt-tab" data-toggle="tab" href="#pt" role="tab" aria-controls="pt"
+                    aria-selected="true">
+                    <img rel="preload" src="../../../assets/images/brasil.png" alt="" class="br-flag" as="image">
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" id="en-tab" data-toggle="tab" href="#en" role="tab" aria-controls="en"
+                    aria-selected="false">
+                    <img rel="preload" src="../../../assets/images/eua.png" alt="" class="eua-flag" as="image">
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
+                    aria-selected="false">Foto de perfil &nbsp;&nbsp;
+                    <i class="fas fa-images"></i>
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="pt" role="tabpanel" aria-labelledby="pt-tab">
+                  <br>
+                  <form>
+                    <div class="form-group">
+                      <label>Título</label>
+                      <input [(ngModel)]="titleBR" [ngModelOptions]="{standalone: true}" type="text"
+                        class="form-control input-modify" placeholder="Título">
+                    </div>
+                    <div class="form-group">
+                      <label>Descrição</label>
+                      <textarea [(ngModel)]="descriptionBR" [ngModelOptions]="{standalone: true}" type="text"
+                        class="form-control input-modify" placeholder="Descrição"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
+                  <br>
+                  <form>
+                    <div class="form-group">
+                      <label>Título</label>
+                      <input [(ngModel)]="titleEN" [ngModelOptions]="{standalone: true}" type="text"
+                        class="form-control input-modify" placeholder="Título">
+                    </div>
+                    <div class="form-group">
+                      <label>Descrição</label>
+                      <textarea [(ngModel)]="descriptionEN" [ngModelOptions]="{standalone: true}" type="text"
+                        class="form-control input-modify" placeholder="Descrição"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                  <form>
+                    <br>
+                    <div class="custom-file">
+                      <input (change)="handleFileInput($event.target.files)" type="file" class="custom-file-input"
+                        id="customFile">
+                      <label class="custom-file-label" for="customFile">
+                        <small *ngIf="fileToUpload">{{ fileName }}</small></label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="activeEdition == true" (click)="updateAboutMe()" type="button" class="btn">SALVAR</button>
+    </div>
+  </div>
+</div>

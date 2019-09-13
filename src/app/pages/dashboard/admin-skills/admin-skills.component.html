@@ -1,0 +1,145 @@
+<!-- Skills -->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center margin-top">HABILIDADES</h1>
+      <hr class="line-title-white">
+      <br>
+    </div>
+    <div *ngIf="!loading" class="col-lg-3 col-md-4 col-sm-12">
+      <button class="btn" data-toggle="modal" data-target="#addSkillModal">ADICIONAR
+        <i class="fas fa-plus icon"></i></button>
+    </div>
+  </div>
+  <br>
+
+  <div *ngIf="loading" class="text-center">
+    <app-lds-facebook></app-lds-facebook>
+  </div>
+
+  <div *ngIf="!loading" class="row">
+    <div *ngFor="let skill of skills" class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card justify-content-center font-black">
+        <span class="skills">{{ skill.skill }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ skill.value }} &nbsp; %
+          <i (click)="getSkill(skill.id)" class="far fa-trash-alt red cursor-pointer float-right tools"
+            data-toggle="modal" data-target=".bd-example-modal-sm"></i>
+          <i (click)="getSkill(skill.id)" data-toggle="modal" data-target="#editSkillModal"
+            class="fas fa-pen dark-blue cursor-pointer float-right tools"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="icon-shadow icon-size" [ngClass]="skill.classes | skillIcons"
+            [style.color]="skill.classes | skillColors"></i>
+        </span>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-sm bottom" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm bottom">
+      <div class="modal-content modal-content-transparent">
+        <button (click)="deleteSkill()" type="button" class="btn delete pink-bg" data-dismiss="modal">Deletar</button>
+        <br>
+        <button type="button" class="btn dark-blue-bg" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <!-- Skills -->
+
+  <!-- Add skill modal -->
+  <div class="modal fade font-black" id="addSkillModal" tabindex="-1" role="dialog" aria-labelledby="addSkillModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addSkillModalLabel">Adicionar </h5>
+          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label>Habilidade </label>
+              <input [(ngModel)]="skillName" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Habilidade">
+            </div>
+            <div class="form-group">
+              <label>Cor </label>
+              <input [(ngModel)]="color" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Cor">
+            </div>
+            <div class="form-group">
+              <label>Classe 1 </label>
+              <input [(ngModel)]="classe1" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Classe 1">
+            </div>
+            <div class="form-group">
+              <label>Classe 2 </label>
+              <input [(ngModel)]="classe2" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Classe 2">
+            </div>
+            <label>Experiência </label>
+            <div class="input-group mb-3">
+              <input [(ngModel)]="value" [ngModelOptions]="{standalone: true}" type="number"
+                class="form-control input-modify append-modify" aria-label="Percentage" placeholder="Experiência"
+                maxlength="100">
+              <div class="input-group-append">
+                <span class="input-group-text font-black">%</span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="addSkill()" type="button" class="btn" data-dismiss="modal">ADICIONAR </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade font-black" id="editSkillModal" tabindex="-1" role="dialog" aria-labelledby="editSkillModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editSkillModalLabel">Editar</h5>
+          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label>Habilidade </label>
+              <input [(ngModel)]="skillName" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Habilidade">
+            </div>
+            <div class="form-group">
+              <label>Cor </label>
+              <input [(ngModel)]="color" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Cor">
+            </div>
+            <div class="form-group">
+              <label>Classe 1 </label>
+              <input [(ngModel)]="classe1" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Classe 1">
+            </div>
+            <div class="form-group">
+              <label>Classe 2 </label>
+              <input [(ngModel)]="classe2" [ngModelOptions]="{standalone: true}" type="text"
+                class="form-control input-modify" placeholder="Classe 2">
+            </div>
+            <label>Experiência </label>
+            <div class="input-group mb-3">
+              <input [(ngModel)]="value" [ngModelOptions]="{standalone: true}" type="number"
+                class="form-control input-modify append-modify" aria-label="Percentage" placeholder="Experiência">
+              <div class="input-group-append">
+                <span class="input-group-text font-black">%</span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="updateSkill()" type="button" class="btn" data-dismiss="modal">SALVAR
+            MUDANÇAS</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add skill modal -->
+</div>

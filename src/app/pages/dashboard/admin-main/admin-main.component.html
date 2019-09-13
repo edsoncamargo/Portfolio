@@ -1,0 +1,49 @@
+<div class="wrapper font-color">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+    <div class="dismiss">
+      <i class="fas fa-angle-left"></i>
+    </div>
+
+    <div class="sidebar-header">
+      <h3>Painel administrativo</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+      <p>Edson C. Menezes</p>
+      <li routerLink="/admin/home" routerLinkActive="active" class="exit cursor-pointer">
+        <a data-toggle="collapse" aria-expanded="false">HOME</a>
+      </li>
+      <li routerLink="/admin/about" routerLinkActive="active" class="exit cursor-pointer">
+        <a>ABOUT</a>
+      </li>
+      <li routerLink="/admin/timeline" routerLinkActive="active" class="exit cursor-pointer">
+        <a>EXPERIÊNCIAS</a>
+      </li>
+      <li routerLink="/admin/skills" routerLinkActive="active" class="exit cursor-pointer">
+        <a>HABILIDADES</a>
+      </li>
+      <li routerLink="/admin/posts" routerLinkActive="active" class="exit cursor-pointer">
+        <a>POSTS</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+          <i class="fas fa-bars"></i>
+        </button>
+        <img rel="preload" src="src\assets\images\Logo Hunter (sem fundo e branco).png" class="img" alt="" as="image">
+        <span (click)="logout()" class="logout cursor-pointer">sair</span>
+      </div>
+    </nav>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<div class="overlay"></div>

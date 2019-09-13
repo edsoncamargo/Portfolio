@@ -1,0 +1,53 @@
+<div class="d-none d-sm-block fixed-top">
+  <div class="navbar navbar-light light-gray-bg" id="navbar">
+    <div class="navbar-header text-navbar">
+      <a href="#home" class="home-nav active">
+        <span rel="preload" as="fetch">{{ "global.home" | translate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </a>
+      <a href="#about" class="about-nav">
+        <span rel="preload" as="fetch">{{ "global.about" | translate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </a>
+      <a href="#home">
+        <img rel="preload" src="../../../assets/images/Logo Hunter.png" class="img" alt="" as="image">
+      </a>
+      <a href="#projects" class="services-nav">
+        <span rel="preload" as="fetch">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ "global.services" | translate }}</span>
+      </a>
+      <a href="#contact" class="contact-nav">
+        <span rel="preload" as="fetch">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ "global.contact" | translate }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="secondary-navbar"></div>
+</div>
+
+<div class="container-full d-sm-none fixed-top">
+  <nav class="navbar navbar-expand-lg light-gray-bg bg-light">
+    <a>
+      <img rel="preload" src="../../../assets/images/Logo Hunter.png" class="img" alt="" as="image">
+    </a>
+    <button (click)="onNavbar()" class="navbar-toggler" type="button">
+      <span><i class="fas fa-bars dark-gray"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li (click)="onNavbar()" class="nav-item active">
+          <a rel="preload" as="fetch" class="nav-link" href="#home"
+            class="home-nav active">{{ "global.home" | translate }}</a>
+        </li>
+        <li (click)="onNavbar()" class="nav-item">
+          <a class="nav-link" href="#about" class="about-nav">{{ "global.about" | translate }}</a>
+        </li>
+        <li (click)="onNavbar()" class="nav-item">
+          <a rel="preload" as="fetch" class="nav-link" href="#projects"
+            class="services-nav">{{ "global.services" | translate }}</a>
+        </li>
+        <li (click)="onNavbar()" class="nav-item">
+          <a rel="preload" as="fetch" class="nav-link" href="#contact"
+            class="contact-nav">{{ "global.contact" | translate }}</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="secondary-navbar"></div>
+</div>

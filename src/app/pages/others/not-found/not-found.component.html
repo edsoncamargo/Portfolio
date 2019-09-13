@@ -1,0 +1,15 @@
+<div class="background font-color">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12">
+        <img rel="preload" class="d-none d-md-block img-lg-md" src="../../../assets/images/Oops!.png" alt="" as="image">
+        <img rel="preload" class="d-sm-none img-sm" src="../../../assets/images/Oops!.png" alt="" as="image">
+        <h1 rel="preload" as="fetch">{{ "error.not_found" | translate }}</h1>
+        <h6 rel="preload" as="fetch">{{ "error.page_removed" | translate }}</h6>
+        <h6 rel="preload" as="fetch">{{ "error.unavailable" | translate }}</h6>
+        <br><br><br>
+        <button (click)="goToHomepage()" class="btn">{{ "error.go_home" | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

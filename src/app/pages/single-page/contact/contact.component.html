@@ -1,0 +1,74 @@
+<div class="dark-blue-bg costumize-bg font">
+  <div class="container top">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center font-color margin-top">{{ "global.contact" | translate | uppercase }}</h1>
+        <hr class="line-title-white">
+        <br>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card light-gray-bg">
+          <div class="row">
+            <div class="col-lg-6 col-sm-12">
+              <div class="padding">
+                <h1 class="contact"> {{ "contact.contact-me" | translate }} </h1>
+                <hr class="line float-left">
+                <br>
+              </div>
+              <form class="padding">
+                <div class="form-group">
+                  <label class="title" for="">{{ "global.subject" | translate }}</label>
+                  <input type="email" class="form-control input" id=""
+                    placeholder="{{ 'global.subject_plc' | translate }}" [(ngModel)]="subject"
+                    [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group">
+                  <label class="title" for="">{{ "global.name" | translate }}</label>
+                  <input type="text" class="form-control input" id="" aria-describedby=""
+                    placeholder="{{ 'global.name_plc' | translate }}" [(ngModel)]="name"
+                    [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group">
+                  <label class="title" for="">{{ "global.e-mail" | translate }}</label>
+                  <input type="email" class="form-control input" id="" aria-describedby=""
+                    placeholder="{{ 'global.e-mail_plc' | translate }}" [(ngModel)]="email"
+                    [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group re-captcha">
+                  <div style="transform:scale(0.8);transform-origin:0;">
+                    <re-captcha (resolved)="resolved($event)" siteKey="6LdPDq0UAAAAAH1AgXTft0dxXImI6wMQ4fVb20rH">
+                    </re-captcha>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <form>
+                <div class="form-group text-form">
+                  <label class="padding-top title"
+                    for="">&nbsp;&nbsp;&nbsp;&nbsp;{{ "global.message" | translate }}</label>
+                  <textarea class="form-control textarea" placeholder="{{ 'global.message_plc' | translate }}"
+                    [(ngModel)]="text" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+                <div class="d-none d-sm-block">
+                  <br>
+                </div>
+              </form>
+              <button *ngIf="!sending" (click)="send()" type="button"
+                [disabled]="!subject || !name || !email || !captcha" class="col-12 font-color"
+                [class.cursor-pointer]="subject && name && email && captcha"><i class="fas fa-paper-plane"></i>
+                &nbsp;&nbsp;&nbsp;&nbsp; {{ "contact.send_message" | translate }}</button>
+              <div *ngIf="sending" class="text-center">
+                <app-lds-facebook-blue></app-lds-facebook-blue>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ngx-alerts></ngx-alerts>
+  </div>
+</div>

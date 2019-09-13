@@ -1,0 +1,52 @@
+{
+  "global": {
+    "home": "Home",
+    "about": "Sobre",
+    "timeline": "Experiências",
+    "services": "Projetos",
+    "contact": "Contato",
+    "skills": "Habilidades",
+    "name": "Nome",
+    "name_plc": "Digite seu nome",
+    "e-mail": "E-mail",
+    "e-mail_plc": "Digite seu e-mail",
+    "subject": "Assunto",
+    "subject_plc": "Digite o assunto",
+    "message": "Mensagem",
+    "message_plc": "Digite sua mensagem aqui..."
+  },
+  "titles": {
+    "main": "Portfólio - Edson Camargo Menezes, Desenvolvedor Web"
+  },
+  "home": {
+    "title": "Desenvolvedor Web"
+  },
+  "about": {
+    "hi_guys": "{{value}}",
+    "informations_one": "{{value}}"
+  },
+  "services": {},
+  "contact": {
+    "contact-me": "Fale comigo",
+    "verification": "Verificação",
+    "send_message": "Enviar mensagem"
+  },
+  "footer": {
+    "rights_one": "© 2019 Copyright Edson Camargo Menezes",
+    "rights_two": "Todos os direitos reservados."
+  },
+  "error_guards": {
+    "access_denied": "Acesso Negado!",
+    "no_permissions": "Você não possui permissão para acessar essa rota.",
+    "please": "Por favor, faça log in em uma conta de administrador para acessar.",
+    "you_will": "Você será redirecionado para a home em",
+    "seconds": "segundos...",
+    "redirecting": "Redirecionando..."
+  },
+  "error": {
+    "not_found": "404 - PÁGINA NÃO ENCONTRADA",
+    "page_removed": "A página que você está olhando deve ter sido removida,",
+    "unavailable": "nome alterado ou temporariamente indisponível.",
+    "go_home": "VÁ PARA HOME"
+  }
+}
