@@ -91,3 +91,135 @@ span.input-group-text {
     margin-right: 15px;
     border-radius: 5px;
 }
+
+.margin-top {
+    margin-top: 20px;
+}
+
+input:focus {
+    border-color: #CED4DA !important;
+    box-shadow: 1px 0px 10px var(--dark-blue); // outline: 5px solid var(--pink);
+}
+
+input.add-modal {
+    border-top: transparent !important;
+    border-left: transparent !important;
+    border-right: transparent !important;
+    border-radius: none !important;
+}
+
+input.add-modal:focus {
+    box-shadow: 0px 1px 0px var(--dark-blue);
+}
+
+span.input-group-text {
+    background: var(--pink);
+}
+
+.btn {
+    border-color: none !important;
+    background-color: rgba(231, 29, 54, 1);
+    color: #fff;
+    width: 100%;
+    border-radius: 25px;
+}
+
+.btn:hover {
+    color: #fff !important;
+    background-color: rgba(168, 0, 21, 1);
+}
+
+.plus {
+    font-size: 1em;
+    float: right;
+    margin-top: 5px;
+    color: #fff;
+}
+
+a.nav-link {
+    color: var(--pink);
+}
+
+.br-flag {
+    width: 20px;
+}
+
+.eua-flag {
+    width: 18.50px;
+}
+
+// Card
+.posts {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card {
+    border: transparent !important;
+    -webkit-box-shadow: 5px 7px 14px -7px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 5px 7px 14px -7px rgba(0, 0, 0, 0.40);
+    box-shadow: 5px 7px 14px -7px rgba(0, 0, 0, 0.40);
+}
+
+.card-header {
+    border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
+    border-bottom: none !important;
+}
+
+.card {
+    border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
+}
+
+.tools {
+    font-size: 1em;
+}
+
+.margin-right {
+    margin-right: 15px
+}
+
+.font-black {
+    color: #000 !important;
+}
+
+.btn.font-black {
+    font-weight: 600 !important;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal-content-transparent {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none !important;
+}
+
+.modal-body {
+    overflow-y: auto;
+}
+
+.modal-dialog,
+.modal-content {
+    max-height: 82vh;
+}
+
+.images {
+    margin-bottom: 10px;
+}
+
+.delete-image {
+    position: absolute;
+    right: 25px;
+    margin-top: 10px;
+}
+
+hr.image-div {
+    height: 2px;
+    background: var(--pink);
+}

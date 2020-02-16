@@ -4,12 +4,14 @@
 
 export const environment = {
   production: false,
-  apiKey: "*********************",
-  authDomain: "*********************",
-  databaseURL: "*********************",
-  projectId: "*********************",
-  storageBucket: "*********************",
-  messagingSenderId: "*********************"
+  apiKey: 'AIzaSyAdSp1cdOK9S6Zq2ADiHHhSUNv_59jPhEI',
+  authDomain: 'portfolio-hnt3-dev.firebaseapp.com',
+  databaseURL: 'https://portfolio-hnt3-dev.firebaseio.com',
+  projectId: 'portfolio-hnt3-dev',
+  storageBucket: 'portfolio-hnt3-dev.appspot.com',
+  messagingSenderId: '64690068652',
+  appId: '1:64690068652:web:8d032e198f9ae1f6069309',
+  measurementId: 'G-516223VJGE'
 };
 
 /*

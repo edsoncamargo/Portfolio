@@ -11,8 +11,8 @@ const nodemailer = require('nodemailer');
 const cors = require('cors')({ origin: true });
 
 const sender = "porfolioedson@gmail.com";
-const pass = "*********************";
-const to = "contato@edsoncamargo.com.br"
+const pass = "Dinhonnm4";
+const to = "dinhocmenezes@hotmail.com"
 
 var transporter = nodemailer.createTransport({
     host: "smtp.gmail.com", // Serviço responsável pelo envio do e-mail (gmail, outlook ou sua hospedagem) - Esse host, possuí um limite de 500 e-mails por dia

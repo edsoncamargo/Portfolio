@@ -42,6 +42,8 @@ export class AdminTimelineComponent implements OnInit {
   path = '';
   // Timeline storage
 
+  previousImage: string;
+
   constructor(private timelineDaoService: TimelineService) { }
 
   ngOnInit() {
@@ -81,6 +83,7 @@ export class AdminTimelineComponent implements OnInit {
       this.descriptionEn = timeline.descriptionEn;
       this.fullPath = timeline.fullPath;
       this.url = timeline.url;
+      this.previousImage = this.url;
       this.id = id;
     }));
   }
@@ -88,16 +91,27 @@ export class AdminTimelineComponent implements OnInit {
   edit() {
     this.timeline = new Timeline(this.date, this.dateEn, this.company,
       this.companyEn, this.description, this.descriptionEn, this.fullPath, this.url, this.id);
-    this.timelineDaoService.edit(this.timeline);
+    if (this.fileToUpload) {
+      this.timelineDaoService.updateCompanyPic(this.timeline, this.fileToUpload);
+    } else {
+      this.timelineDaoService.edit(this.timeline);
+    }
   }
 
   delete() {
-
+    this.timelineDaoService.delete(this.id, this.timeline);
   }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.fileName = this.fileToUpload.name;
+  }
+
+  removePreviewImage() {
+    if (this.fileToUpload) {
+      this.previousImage = null;
+      this.fileToUpload = null;
+    }
   }
 
 }

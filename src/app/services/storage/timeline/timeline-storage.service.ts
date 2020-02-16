@@ -26,4 +26,8 @@ export class TimelineStorageService {
     });
   }
 
+  deleteCompanyPic(fullPath: string): Promise<any> {
+    return this.storage.child(fullPath).delete();
+  }
+
 }

@@ -105,9 +105,42 @@ export class TimelineService {
     });
   }
 
-  delete(id: string) {
-    this.db.database().child(this.TIMELINE).child(id).remove(onComplete => {
-      return true;
+  updateCompanyPic(timeline: Timeline, files: File) {
+    if (timeline.fullPath) {
+      this.storage.deleteCompanyPic(timeline.fullPath).then(() => {
+        this.storage.addCompanyPic(files, timeline.id, (response: any) => {
+          timeline.fullPath = response.metadata.fullPath;
+          this.storage.getCompanyPic(timeline.fullPath, (url: string) => {
+            timeline.url = url;
+            this.updateToID(timeline.id, timeline);
+            this.edit(timeline);
+          });
+        });
+      });
+    } else {
+      this.storage.addCompanyPic(files, timeline.id, (response: any) => {
+        timeline.fullPath = response.metadata.fullPath;
+        this.storage.getCompanyPic(timeline.fullPath, (url: string) => {
+          timeline.url = url;
+          this.updateToID(timeline.id, timeline);
+          this.edit(timeline);
+        });
+      });
+    }
+  }
+
+  delete(id: string, timeline: Timeline) {
+    const fullPath = timeline.fullPath;
+    this.db.database().child(this.TIMELINE).child(id).remove().then(() => {
+      if (fullPath !== null || fullPath !== '' || fullPath !== undefined) {
+        this.storage.deleteCompanyPic(fullPath).then((response) => {
+          return true;
+        }).catch((err) => {
+          console.log(err);
+        });
+      } else {
+        return true;
+      }
     });
   }
 

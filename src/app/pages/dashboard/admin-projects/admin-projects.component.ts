@@ -47,7 +47,7 @@ export class AdminProjectsComponent implements OnInit {
   id: string = null;
   // Get projects variables
 
-  // Edit 
+  // Edit
   isEdit = false;
   project: Project = null;
 
@@ -94,7 +94,7 @@ export class AdminProjectsComponent implements OnInit {
     reader.readAsDataURL(this.file);
     reader.onload = (_event) => {
       this.previousCover = reader.result;
-    }
+    };
   }
 
   removeCover() {
@@ -135,7 +135,7 @@ export class AdminProjectsComponent implements OnInit {
       reader.readAsDataURL(files.item(i));
       reader.onload = (_event) => {
         this.previousImages.push(reader.result);
-      }
+      };
     }
 
   }
@@ -173,10 +173,8 @@ export class AdminProjectsComponent implements OnInit {
             project.images = images;
           }
         });
-
         this.projects.push(project);
       }
-
       this.loading = false;
     });
   }
@@ -192,6 +190,7 @@ export class AdminProjectsComponent implements OnInit {
     this.images = project.images;
     this.id = project.id;
     this.urlCover = project.urlCover;
+    this.previousCover = this.urlCover;
     this.project = project;
   }
 
@@ -199,7 +198,6 @@ export class AdminProjectsComponent implements OnInit {
     this.modalLoading = true;
     this.project = new Project
       (this.title, this.description, this.url, this.fullPathCover, this.id, this.images, this.titleEn, this.descriptionEn, this.urlCover);
-
     this.projectsDaoService.edit(this.project, (isEdited: any) => {
       if (isEdited == true) {
         this.uploadFileToActivity(this.id, (response: any) => {

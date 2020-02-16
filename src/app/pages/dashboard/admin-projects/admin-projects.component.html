@@ -10,11 +10,9 @@
           class="fas fa-plus plus"></em></button>
     </div>
   </div>
-
   <div *ngIf="loading" class="text-center">
     <app-lds-facebook></app-lds-facebook>
   </div>
-
   <div *ngIf="!loading" class="row">
     <div *ngFor="let project of projects" class="col-lg-6 col-sm-12 font-black">
       <br>
@@ -39,7 +37,6 @@
       <br>
     </div>
   </div>
-
   <!-- Add post modal -->
   <div class="modal fade font-black" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModal"
     aria-hidden="true">
@@ -50,7 +47,6 @@
           <h5 *ngIf="isEdit" class="modal-title" id="projectModal">Editar {{ title }}</h5>
           <em class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></em>
         </div>
-
         <div class="modal-body">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -59,21 +55,18 @@
                 <img rel="preload" src="../../../assets/images/brasil.png" alt="" class="br-flag" as="image">
               </a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" id="en-tab" data-toggle="tab" href="#en" role="tab" aria-controls="en"
                 aria-selected="false">
                 <img rel="preload" src="../../../assets/images/eua.png" alt="" class="eua-flag" as="image">
               </a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
                 aria-selected="false">Imagens &nbsp;&nbsp;
                 <em class="fas fa-images"></em>
               </a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="link"
                 aria-selected="false">Link &nbsp;&nbsp;
@@ -119,11 +112,11 @@
                   <label>Adicionar capa</label>
                   <input (change)="handleFileInput($event)" type="file" class="form-control add-modal file cover"
                     placeholder="Capa">
-                  <div *ngIf="file">
+                  <div *ngIf="file || url">
                     <br>
                     <em (click)="removeCover()"
                       class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></em>
-                    <img rel="preload" [src]="previousCover" alt="" class="posts images cursor-pointer" as="image">
+                    <img [src]="previousCover" alt="" class="posts images cursor-pointer">
                     <hr class="image-div">
                   </div>
                 </div>
@@ -135,16 +128,15 @@
                   <div *ngIf="previousImages.length > 0">
                     <br>
                     <label for="">Preview</label>
-                    <div *ngFor="let image of previousImages; let i = index;">
+                    <ng-container *ngFor="let image of previousImages; let i = index;">
                       <em (click)="removeImage(i)"
                         class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></em>
                       <img rel="preload" class="posts images cursor-pointer projects" [src]="image" alt="" as="image">
-                    </div>
+                    </ng-container>
                     <hr class="image-div">
                   </div>
                 </div>
                 <br>
-
                 <!-- Showing images -->
                 <div *ngIf="images && images.length > 0" class="form-groug">
                   <label>Imagens armazenadas</label>
@@ -168,19 +160,16 @@
             </div>
           </div>
         </div>
-
-        <div *ngIf="!modalLoading" class="modal-footer">
+        <ng-container *ngIf="!modalLoading; else elseTemplate">
           <button *ngIf="!isEdit" (click)="add()" type="button" class="btn">ADICIONAR</button>
           <button *ngIf="isEdit" (click)="edit()" type="button" class="btn">SALVAR</button>
-        </div>
-
-        <div *ngIf="modalLoading" class="modal-footer">
+        </ng-container>
+        <ng-template #elseTemplate>
           <app-lds-facebook-blue></app-lds-facebook-blue>
-        </div>
+        </ng-template>
       </div>
     </div>
   </div>
-
   <!-- Delete modal project -->
   <div class="modal fade bd-example-modal-sm bottom" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
@@ -192,5 +181,4 @@
       </div>
     </div>
   </div>
-
 </div>

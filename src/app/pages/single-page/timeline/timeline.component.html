@@ -8,41 +8,43 @@
   </div>
 </div>
 <!-- TITLE -->
-
-<div *ngIf="loading" class="text-center">
-  <app-lds-facebook-blue></app-lds-facebook-blue>
-</div>
-
-<!-- CONTENT -->
-<div *ngIf="!loading" class="timeline-wrap">
-  <ol class="timeline">
-    <li *ngFor="let timeline of timelines" class="timeline__entry">
-      <time>
-        <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseDateEnglish">
-          {{ timeline.date }}
-        </ng-container>
-        <ng-template #elseDateEnglish>
-          {{ timeline.dateEn }}
-        </ng-template>
-      </time>
-      <h3 class="timeline-headline">
-        <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseCompanyEnglish">
-          {{ timeline.company }}
-        </ng-container>
-        <ng-template #elseCompanyEnglish>
-          {{ timeline.companyEn }}
-        </ng-template>
-      </h3>
-      <img [src]="timeline.url | hasImage: getLanguage()" class="img-company" alt="Imagem da empresa">
-      <span>
-        <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseDescriptionEnglish">
-          {{ timeline.description }}
-        </ng-container>
-        <ng-template #elseDescriptionEnglish>
-          {{ timeline.descriptionEn }}
-        </ng-template>
-      </span>
-    </li>
-  </ol>
-</div>
-<!-- CONTENT -->
+<ng-container *ngIf="loading; else elseNotLoading">
+  <div class="text-center">
+    <app-lds-facebook-blue></app-lds-facebook-blue>
+  </div>
+</ng-container>
+<ng-template #elseNotLoading>
+  <!-- CONTENT -->
+  <div class="timeline-wrap">
+    <ol class="timeline">
+      <li *ngFor="let timeline of timelines" class="timeline__entry">
+        <time>
+          <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseDateEnglish">
+            {{ timeline.date }}
+          </ng-container>
+          <ng-template #elseDateEnglish>
+            {{ timeline.dateEn }}
+          </ng-template>
+        </time>
+        <h3 class="timeline-headline">
+          <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseCompanyEnglish">
+            {{ timeline.company }}
+          </ng-container>
+          <ng-template #elseCompanyEnglish>
+            {{ timeline.companyEn }}
+          </ng-template>
+        </h3>
+        <img [src]="timeline.url | hasImage: getLanguage()" class="img-company" alt="Imagem da empresa">
+        <span>
+          <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseDescriptionEnglish">
+            {{ timeline.description }}
+          </ng-container>
+          <ng-template #elseDescriptionEnglish>
+            {{ timeline.descriptionEn }}
+          </ng-template>
+        </span>
+      </li>
+    </ol>
+  </div>
+  <!-- CONTENT -->
+</ng-template>
