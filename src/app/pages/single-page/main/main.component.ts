@@ -9,12 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private title: Title,
-    private translate: TranslateService) { }
+  constructor(private title: Title) { }
 
   ngOnInit() {
-    // console.log(this.translate.translations);
-    this.title.setTitle("Portfólio - Edson Camargo Menezes, Desenvolvedor Web");
+    this.title.setTitle('Portfólio - Edson Camargo Menezes, Desenvolvedor Web');
   }
 
 }

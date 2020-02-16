@@ -21,7 +21,7 @@ export class AdminTimelineComponent implements OnInit {
   description: string = null;
   descriptionEn: string = null;
   fullPath: string = null;
-  url: string = null;
+  url = '';
   urlEn: string = null;
   id: string = null;
   timeline: Timeline = null;
@@ -65,6 +65,7 @@ export class AdminTimelineComponent implements OnInit {
 
   list() {
     this.timelineDaoService.list((timelines: Array<Timeline>) => {
+      this.timelines = [];
       this.timelines = timelines;
       this.loading = false;
     });

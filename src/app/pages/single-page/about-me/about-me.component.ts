@@ -58,7 +58,6 @@ export class AboutMeComponent implements DoCheck {
         } else {
           this.titleEN = about[language]['title'];
           this.descriptionEN = about[language]['description'];
-          console.log(about);
         }
       }
       this.loading = false;

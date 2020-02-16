@@ -49,7 +49,7 @@ export class ProjectsComponent implements OnInit {
   language: string = null;
 
   // Loadings
-  loading: boolean = true;
+  loading = true;
 
   constructor(private localStorage: LocalStorageService,
     private projectsDaoService: ProjectsDaoService) { }
@@ -60,7 +60,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   removingClassModal() {
-    $("body").addClass("modal-open");
+    $('body').addClass('modal-open');
   }
 
   getLanguage() {
@@ -102,7 +102,7 @@ export class ProjectsComponent implements OnInit {
 
   secondModalOpen() {
     $('.modal-zoom').on('hidden.bs.modal', function () {
-      $("body").addClass("modal-open");
+      $('body').addClass('modal-open');
     });
   }
 
