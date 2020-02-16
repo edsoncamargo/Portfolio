@@ -19,7 +19,7 @@ export class SkillsComponent implements OnInit {
   skills: Array<Skill> = [];
 
   // Loading
-  loading: boolean = false;
+  loading = false;
 
   constructor(private skillsService: SkillsService) { }
 
@@ -29,31 +29,32 @@ export class SkillsComponent implements OnInit {
   }
 
   enableTooltip() {
-    $(document.body).tooltip({ selector: "[title]" });
+    $(document.body).tooltip({ selector: '[title]' });
   }
 
   listSkills() {
     this.loading = true;
     this.skillsService.listSkills((skills: Array<Skill>) => {
       this.skills = [];
-      for (let skill of skills) {
-        skill['percent'] = skill.value + "%";
+      for (const skill of skills) {
+        skill.percent = skill.value + '%';
         this.skills.push(skill);
       }
-
-      this.skills.sort(function (a, b) {
-        if (a.value < b.value) {
-          return 1;
-        }
-        if (a.value > b.value) {
-          return -1;
-        }
-
-        // a must be equal to b
-        return 0;
-      });
-
+      this.sort();
       this.loading = false;
+    });
+  }
+
+  private sort() {
+    this.skills.sort(function (a, b) {
+      if (a.value < b.value) {
+        return 1;
+      }
+      if (a.value > b.value) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
     });
   }
 

@@ -13,9 +13,9 @@ import { ConnectionUtilsService } from '../../utils/connection-utils.service';
 export class AboutDaoService {
 
   // Paths
-  ABOUT: string = "about/";
-  BR: string = "br/";
-  EN: string = "en/";
+  ABOUT = 'about/';
+  BR = 'br/';
+  EN = 'en/';
 
   constructor(private db: ConnectionUtilsService) { }
 
@@ -44,18 +44,18 @@ export class AboutDaoService {
     });
   }
 
-  getAboutMe(onResolve) {
+  getAboutMe(onResolve: any) {
     this.db.database().child(this.ABOUT).on('value', (snapshot) => {
-      let data = snapshot.val();
+      const data = snapshot.val();
       onResolve(data);
     });
   }
 
-  getFullPath(onResolve) {
+  getFullPath(onResolve: any) {
     this.db.database().child(this.ABOUT).child(this.BR).on('value', (snapshot) => {
-      let data = snapshot.val();
+      const data = snapshot.val();
       onResolve(data.path);
-    })
+    });
   }
   // About me
 

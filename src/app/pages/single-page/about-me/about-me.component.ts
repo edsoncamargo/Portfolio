@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 
 // Services
 import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
@@ -10,25 +10,26 @@ import { AboutStorageService } from '../../../services/storage/about/about-stora
   templateUrl: './about-me.component.html',
   styleUrls: ['./about-me.component.scss']
 })
-export class AboutMeComponent implements OnInit {
+export class AboutMeComponent implements DoCheck {
 
   // Portuguese
-  titleBR: string = "";
-  descriptionBR: string = "";
+  titleBR = '';
+  descriptionBR = '';
 
   // English
-  titleEN: string = "";
-  descriptionEN: string = "";
+  titleEN = '';
+  descriptionEN = '';
 
   // Current language
-  language: string = "";
+  language = '';
 
   // Profile picture
-  path: string = "";
-  url: string = "";
+  path = '';
+  url = '';
 
   // Loading
-  loading: boolean = false;
+  loading = false;
+  loadingPicture = false;
 
   constructor(private storage: LocalStorageService,
     private aboutDaoService: AboutDaoService,
@@ -38,8 +39,6 @@ export class AboutMeComponent implements OnInit {
 
     this.showProfilePicture();
   }
-
-  ngOnInit() { }
 
   ngDoCheck(): void {
     this.language = this.storage.getLanguage();
@@ -53,22 +52,25 @@ export class AboutMeComponent implements OnInit {
     this.loading = true;
     this.aboutDaoService.getAboutMe((about: any) => {
       for (const language in about) {
-        if (language == "br") {
-          this.titleBR = about[language]["title"];
-          this.descriptionBR = about[language]["description"];
+        if (language === 'br') {
+          this.titleBR = about[language]['title'];
+          this.descriptionBR = about[language]['description'];
         } else {
-          this.titleEN = about[language]["title"];
-          this.descriptionEN = about[language]["description"];
+          this.titleEN = about[language]['title'];
+          this.descriptionEN = about[language]['description'];
+          console.log(about);
         }
       }
+      this.loading = false;
     });
   }
 
   showProfilePicture() {
-    this.aboutDaoService.getFullPath((path) => {
-      this.aboutStorage.getProfilePic(path, (url) => {
+    this.loadingPicture = true;
+    this.aboutDaoService.getFullPath((path: string) => {
+      this.aboutStorage.getProfilePic(path, (url: string) => {
         this.url = url;
-        this.loading = false;
+        this.loadingPicture = false;
       });
     });
   }

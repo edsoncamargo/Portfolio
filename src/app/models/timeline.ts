@@ -10,9 +10,10 @@ export class Timeline {
     private _url: string;
     private _id: string;
 
-    constructor(date: string, dateEn: string, company: string, companyEn: string, description: string, descriptionEn: string, fullPath?: string, url?: string, id?: string) {
+    constructor(date: string, dateEn: string, company: string, companyEn: string,
+        description: string, descriptionEn: string, fullPath?: string, url?: string, id?: string) {
         this._date = date;
-        this.dateEn = dateEn
+        this.dateEn = dateEn;
         this._company = company;
         this.companyEn = companyEn;
         this._description = description;
@@ -23,16 +24,16 @@ export class Timeline {
     }
 
     parse() {
-        if (this.fullPath == undefined) {
-            this.fullPath = null;
+        if (this.fullPath === undefined || this.url === null) {
+            this.fullPath = '';
         }
 
-        if (this.url == undefined) {
-            this.url = null;
+        if (this.url === undefined || this.url === null) {
+            this.url = '';
         }
 
-        if (this.id == undefined) {
-            this.id = null;
+        if (this.id === undefined || this.url === null) {
+            this.id = '';
         }
     }
 

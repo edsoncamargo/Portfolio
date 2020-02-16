@@ -17,15 +17,15 @@ import { LocalStorageService } from './../../../services/local-storage/local-sto
 export class AdminAboutComponent implements OnInit {
 
   // About me
-  activeEdition: boolean = false;
+  activeEdition = false;
 
   // Portuguese
-  titleBR: string = "";
-  descriptionBR: string = "";
+  titleBR = '';
+  descriptionBR = '';
 
   // English
-  titleEN: string = "";
-  descriptionEN: string = "";
+  titleEN = '';
+  descriptionEN = '';
 
   // About object
   aboutMeBR: AboutMe = null;
@@ -34,18 +34,18 @@ export class AdminAboutComponent implements OnInit {
 
   // About storage
   fileToUpload: File = null;
-  fileName: string = "";
+  fileName = '';
   fileSuccess: any = null;
 
-  path: string = "";
-  url: string = "";
+  path = '';
+  url = '';
   // About storage
 
   // Current language
-  language: string = "";
+  language = '';
 
   // Loadings
-  loading: boolean = true;
+  loading = true;
 
   constructor(private aboutDaoService: AboutDaoService,
     private aboutStorage: AboutStorageService) {
@@ -60,9 +60,9 @@ export class AdminAboutComponent implements OnInit {
   getAboutMe() {
     this.aboutDaoService.getAboutMe((about: any) => {
       for (const language in about) {
-        if (language == "br") {
-          this.titleBR = about[language]["title"];
-          this.descriptionBR = about[language]["description"];
+        if (language === 'br') {
+          this.titleBR = about[language]['title'];
+          this.descriptionBR = about[language]['description'];
         }
       }
       this.loading = false;
@@ -70,7 +70,7 @@ export class AdminAboutComponent implements OnInit {
   }
 
   activeAboutEdit() {
-    if (this.activeEdition == true) {
+    if (this.activeEdition === true) {
       this.activeEdition = false;
     } else {
       this.activeEdition = true;
@@ -100,17 +100,16 @@ export class AdminAboutComponent implements OnInit {
   }
 
   uploadFileToActivity() {
-    this.aboutStorage.addMyProfilePic(this.fileToUpload, (response) => {
+    this.aboutStorage.addMyProfilePic(this.fileToUpload, (response: any) => {
       this.fileSuccess = response;
       this.aboutDaoService.setFullPath(this.fileSuccess.metadata.fullPath);
-
       this.showProfilePic();
     });
   }
 
   showProfilePic() {
     this.aboutDaoService.getFullPath((path: string) => {
-      this.aboutStorage.getProfilePic(path, (url) => {
+      this.aboutStorage.getProfilePic(path, (url: string) => {
         this.url = url;
       });
     });

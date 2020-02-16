@@ -3,7 +3,7 @@
         <div class="row">
             <div class="card pink-card col-6">
                 <br><br>
-                <i class="fas fa-user-astronaut icon text-center"></i>
+                <em class="fas fa-user-astronaut icon text-center"></em>
                 <br><br>
                 <h1 class="welcome text-center">SEJA BEM-VINDO <br> AO PAINEL ADMINISTRATIVO</h1>
                 <img rel="preload" class="logo" src="../../../../assets/images/Logo Hunter (sem fundo e branco).png"
@@ -11,7 +11,7 @@
             </div>
             <div class="card blue-card col-6">
                 <br><br>
-                <i class="fas fa-space-shuttle icon text-center"></i>
+                <em class="fas fa-space-shuttle icon text-center"></em>
                 <br><br>
                 <form>
                     <div class="form-group">
@@ -25,13 +25,17 @@
                             class="form-control" id="exampleInputPassword1" placeholder="Digite a senha">
                     </div>
                     <br><br><br>
-                    <div *ngIf="loading" class="row">
-                        <div class="col-12 text-center">
-                            <app-lds-facebook-blue></app-lds-facebook-blue>
+                    <ng-container *ngIf="loading; else elseTemplate">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <app-lds-facebook></app-lds-facebook>
+                            </div>
                         </div>
-                    </div>
-                    <button *ngIf="!loading" [disabled]="email == '' || password == ''" (click)="login()" type="button"
-                        class="btn">LOGIN</button>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <button [disabled]="email == '' || password == ''" (click)="login()" type="submit"
+                            class="btn">LOGIN</button>
+                    </ng-template>
                 </form>
             </div>
         </div>

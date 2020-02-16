@@ -5,13 +5,15 @@ export class Skill {
     private _skill: string;
     private _value: any;
     private _id: string;
-    private _classes: SkillClasses
+    private _classes: SkillClasses;
+    private _percent: any;
 
-    constructor(skill: string, value: any, id?: string, classes?: SkillClasses) {
+    constructor(skill: string, value: any, id?: string, classes?: SkillClasses, percent?: any) {
         this._skill = skill;
         this._value = value;
         this._id = id;
         this._classes = classes;
+        this._percent = percent;
     }
 
     /**
@@ -76,6 +78,22 @@ export class Skill {
         */
     public set classes(value: SkillClasses) {
         this._classes = value;
+    }
+
+    /**
+       * Setter classes
+       * @param {string} value
+       */
+    public set percent(value: any) {
+        this._percent = value;
+    }
+
+    /**
+      * Setter classes
+      * @param {string} value
+      */
+    public get percent() {
+        return this._percent;
     }
 
 }

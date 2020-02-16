@@ -6,32 +6,40 @@
       <hr class="line-title-white">
       <br>
     </div>
-    <div *ngIf="!loading" class="col-lg-3 col-md-4 col-sm-12">
-      <button class="btn" data-toggle="modal" data-target="#addSkillModal">ADICIONAR
-        <i class="fas fa-plus icon"></i></button>
-    </div>
+    <ng-container *ngIf="!loading">
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        <button class="btn" data-toggle="modal" data-target="#addSkillModal">ADICIONAR
+          <em class="fas fa-plus icon"></em></button>
+      </div>
+    </ng-container>
   </div>
+
   <br>
 
-  <div *ngIf="loading" class="text-center">
-    <app-lds-facebook></app-lds-facebook>
-  </div>
-
-  <div *ngIf="!loading" class="row">
-    <div *ngFor="let skill of skills" class="col-lg-6 col-md-6 col-sm-12">
-      <div class="card justify-content-center font-black">
-        <span class="skills">{{ skill.skill }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ skill.value }} &nbsp; %
-          <i (click)="getSkill(skill.id)" class="far fa-trash-alt red cursor-pointer float-right tools"
-            data-toggle="modal" data-target=".bd-example-modal-sm"></i>
-          <i (click)="getSkill(skill.id)" data-toggle="modal" data-target="#editSkillModal"
-            class="fas fa-pen dark-blue cursor-pointer float-right tools"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <i class="icon-shadow icon-size" [ngClass]="skill.classes | skillIcons"
-            [style.color]="skill.classes | skillColors"></i>
-        </span>
-      </div>
-      <br>
+  <ng-container *ngIf="loading; else elseLoading">
+    <div class="text-center">
+      <app-lds-facebook></app-lds-facebook>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #elseLoading>
+    <div class="row">
+      <ng-container *ngFor="let skill of skills">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="card justify-content-center font-black">
+            <span class="skills">{{ skill.skill }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ skill.value }} &nbsp; %
+              <em (click)="getSkill(skill.id)" class="far fa-trash-alt red cursor-pointer float-right tools"
+                data-toggle="modal" data-target=".bd-example-modal-sm"></em>
+              <em (click)="getSkill(skill.id)" data-toggle="modal" data-target="#editSkillModal"
+                class="fas fa-pen dark-blue cursor-pointer float-right tools"></em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <em class="icon-shadow icon-size" [ngClass]="skill.classes | skillIcons"
+                [style.color]="skill.classes | skillColors"></em>
+            </span>
+          </div>
+          <br>
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
 
   <div class="modal fade bd-example-modal-sm bottom" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
@@ -52,7 +60,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="addSkillModalLabel">Adicionar </h5>
-          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+          <em class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></em>
         </div>
         <div class="modal-body">
           <form>
@@ -100,7 +108,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="editSkillModalLabel">Editar</h5>
-          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+          <em class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></em>
         </div>
         <div class="modal-body">
           <form>

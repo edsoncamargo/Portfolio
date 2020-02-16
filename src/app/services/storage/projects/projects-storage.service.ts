@@ -14,13 +14,13 @@ export class ProjectsStorageService {
   storage = firebase.storage().ref();
 
   // Paths
-  PROJECTS: string = "projects/";
-  COVER: string = "covers/"
-  IMAGES: string = "images/";
+  PROJECTS = 'projects/';
+  COVER = 'covers/'
+  IMAGES = 'images/';
 
   constructor() { }
 
-  add(files: Array<File>, id: string, onResolve) {
+  add(files: Array<File>, id: string, onResolve: any) {
     for (const file of files) {
       this.storage.child(this.PROJECTS).child(this.IMAGES).child(id).child(file.name).put(file).then((snapshot) => {
         this.storage.child(snapshot.metadata.fullPath).getDownloadURL().then((url) => {
@@ -30,7 +30,7 @@ export class ProjectsStorageService {
     }
   }
 
-  addCover(file: File, id: string, onResolve) {
+  addCover(file: File, id: string, onResolve: any) {
     this.storage.child(this.PROJECTS).child(this.COVER).child(id).child("cover").put(file).then((snapshot) => {
       this.storage.child(snapshot.metadata.fullPath).getDownloadURL().then((url: string) => {
         onResolve(snapshot.metadata.fullPath, url);
@@ -38,26 +38,27 @@ export class ProjectsStorageService {
     });
   }
 
-  getDownloadImages(path: string, onResolve) {
+  getDownloadImages(path: string, onResolve: any) {
     this.storage.child(path).getDownloadURL().then((url) => {
       onResolve(url);
     });
   }
 
-  deleteImage(image: ProjectImage, onResolve) {
+  deleteImage(image: ProjectImage, onResolve: any) {
     this.storage.child(image.fullPath).delete().then(() => {
       onResolve(true);
     });
   }
 
-  deleteEverythingFromTheProject(project: Project, onResolve) {
+  deleteEverythingFromTheProject(project: Project, onResolve: any) {
     let count = 0;
     this.storage.child(project.fullPathCover).delete().then(() => {
       for (const image of project.images) {
         this.storage.child(image.fullPath).delete().then(() => {
-          count++
-          if (count >= project.images.length)
+          count++;
+          if (count >= project.images.length) {
             onResolve(true);
+          }
         });
       }
     });

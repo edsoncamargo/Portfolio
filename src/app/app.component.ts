@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Services
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { TranslateServices } from './services/translate/translate.service';
 
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -13,7 +13,7 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(private storage: LocalStorageService, private translate: TranslateServices) {
     this.setPrimaryLanguage();
@@ -25,9 +25,9 @@ export class AppComponent {
   }
 
   setPrimaryLanguage() {
-    if (this.storage.isActive() == true) {
+    if (this.storage.isActive() === true) {
       this.storage.setLanguage('pt_BR');
-      this.translate.setLanguage('pt_BR')
+      this.translate.setLanguage('pt_BR');
     } else {
       this.translate.setLanguage(this.storage.getLanguage());
     }

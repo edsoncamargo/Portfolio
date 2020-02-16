@@ -29,7 +29,7 @@
       <h3 *ngIf="getLanguage() == 'en_US'" class="timeline-headline">
         {{ timeline.companyEn }}
       </h3>
-      <img rel="preload" src="../../../../assets/images/CIT.jpg" class="img-company" alt="" as="image">
+      <img rel="preload" [src]="url | hasImage: getLanguage()" class="img-company" alt="" as="image">
       <span *ngIf="getLanguage() == 'pt_BR'">
         {{ timeline.description }}
       </span>

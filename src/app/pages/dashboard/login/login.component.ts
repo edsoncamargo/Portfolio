@@ -17,14 +17,14 @@ import { LocalStorageService } from '../../../services/local-storage/local-stora
 export class LoginComponent implements OnInit {
 
   // Credentials
-  email: string = "";
-  password: string = "";
+  email = '';
+  password = '';
 
   // Response
-  error: string = "";
+  error = '';
 
   // Loading
-  loading: boolean = false;
+  loading = false;
 
   constructor(private auth: AuthService,
     private storage: LocalStorageService,
@@ -33,23 +33,23 @@ export class LoginComponent implements OnInit {
     this.isLogged();
   }
 
-  ngOnInit() {
-    this.title.setTitle("Log in para dashboard - Edson Camargo Menezes");
+  ngOnInit(): void {
+    this.title.setTitle('Login para dashboard - Edson Camargo Menezes');
   }
 
-  login() {
+  login(): void {
     this.loading = true;
     this.auth.login(this.email, this.password).then((response: any) => {
       this.storage.setUID(response.user.uid);
       this.loading = false;
     }).catch((error) => {
       this.error = JSON.stringify(error.message);
-      $('#errorModal').modal('show');
       this.loading = false;
+      $('#errorModal').modal('show');
     });
   }
 
-  isLogged() {
+  isLogged(): void {
     if (this.auth.isAuth()) {
       this.router.navigateByUrl('/admin');
     } else {

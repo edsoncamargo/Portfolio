@@ -13,7 +13,7 @@ import { ConnectionUtilsService } from '../../utils/connection-utils.service';
 export class SkillsService {
 
   // Paths
-  SKILLS: string = "skills/";
+  SKILLS: string = 'skills/';
 
   id: string = undefined;
 
@@ -30,20 +30,22 @@ export class SkillsService {
       value: skill.value,
       id: id,
       classes: {
-        "color": `${skill.classes.color}`,
-        "class1": `${skill.classes.class1}`,
-        "class2": `${skill.classes.class2}`
+        'color': `${skill.classes.color}`,
+        'class1': `${skill.classes.class1}`,
+        'class2': `${skill.classes.class2}`
       }
     });
   }
 
-  listSkills(onResolve) {
+  listSkills(onResolve: any) {
     this.db.database().child(this.SKILLS).on('value', (snapshot) => {
-      let skills: Array<Skill> = [];
-      let data = snapshot.val();
+      const skills: Array<Skill> = [];
+      const data = snapshot.val();
 
       for (const id in data) {
-        skills.push(data[id]);
+        if (data.hasOwnProperty(id)) {
+          skills.push(data[id]);
+        }
       }
 
       onResolve(skills);
@@ -56,19 +58,19 @@ export class SkillsService {
       value: skill.value,
       id: skill.id,
       classes: {
-        "color": `${skill.classes.color}`,
-        "class1": `${skill.classes.class1}`,
-        "class2": `${skill.classes.class2}`
+        'color': `${skill.classes.color}`,
+        'class1': `${skill.classes.class1}`,
+        'class2': `${skill.classes.class2}`
       }
     });
   }
 
-  getSkill(id: string, onResolve) {
+  getSkill(id: string, onResolve: any) {
     this.id = id;
     this.db.database().child(this.SKILLS).on('value', (snapshot) => {
-      let skills = snapshot.val();
-      for (const id in skills) {
-        if (this.id == id) {
+      const skills = snapshot.val();
+      for (const value in skills) {
+        if (this.id === value) {
           onResolve(skills[id]);
         }
       }

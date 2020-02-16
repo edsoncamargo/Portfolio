@@ -3,73 +3,90 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 rel="preload" as="fetch" class="text-center pink margin-top">{{ "global.services" | translate | uppercase }}</h1>
+        <h1 rel="preload" as="fetch" class="text-center pink margin-top">{{ "global.services" | translate | uppercase }}
+        </h1>
         <hr class="line-title">
         <br>
       </div>
     </div>
-
-    <div *ngIf="loading" class="row text-center">
-      <div class="col-12">
-        <app-lds-facebook-blue></app-lds-facebook-blue>
+    <ng-container *ngIf="loading; else elseLoading">
+      <div class="row text-center">
+        <div class="col-12">
+          <app-lds-facebook-blue></app-lds-facebook-blue>
+        </div>
       </div>
-    </div>
-
-    <div *ngIf="!loading" class="row">
-      <div *ngFor="let project of projects" class="col-lg-6 col-sm-12">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div *ngIf="getLanguage() == 'pt_BR'" class="col-6 truncate">
-                {{ project.title }}
-              </div>
-              <div *ngIf="getLanguage() == 'en_US'" class="col-6 truncate">
-                {{ project.titleEn }}
-              </div>
-              <div class="col-6">
-                <i (click)="getProject(project)"
-                  class="fas fa-info-circle info dark-blue cursor-pointer jello-horizontal" data-toggle="modal"
-                  data-target="#modalInformations"></i>
+    </ng-container>
+    <ng-template #elseLoading>
+      <div class="row">
+        <div *ngFor="let project of projects" class="col-lg-6 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-6 truncate">
+                  <ng-container *ngIf="getLanguage() == 'en_US'; else elseEnglish">
+                    {{ project.title }}
+                  </ng-container>
+                  <ng-template #elseEnglish>
+                    {{ project.titleEn }}
+                  </ng-template>
+                </div>
+                <div class="col-6">
+                  <em (click)="getProject(project)"
+                    class="fas fa-info-circle info dark-blue cursor-pointer jello-horizontal" data-toggle="modal"
+                    data-target="#modalInformations"></em>
+                </div>
               </div>
             </div>
+            <a [href]="project.url" [class.none-events]="project.url == null" target="_blank">
+              <img class="posts cursor-pointer" [src]="project.urlCover | hasImage" [alt]="project.title">
+            </a>
           </div>
-          <a [href]="project.url" [class.none-events]="project.url == null" target="_blank">
-            <img class="posts cursor-pointer" [src]="project.urlCover | notFoundImage" alt="" as="image">
-          </a>
+          <br>
         </div>
-        <br>
       </div>
-    </div>
+    </ng-template>
   </div>
 </div>
 
 <!-- Posts modal -->
-<div *ngIf="!loading" class="modal project-modal fade font-black" id="modalInformations" tabindex="-1" role="dialog"
-  aria-labelledby="modalInformationsLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered project-modal modal-lg" role="document">
-    <div class="modal-content project-modal">
-      <div class="modal-header project-modal dark-blue-bg font-color">
-        <h5 *ngIf="getLanguage() == 'pt_BR'" class="modal-title" id="modalInformationsLabel">{{ title }}</h5>
-        <h5 *ngIf="getLanguage() == 'en_US'" class="modal-title" id="modalInformationsLabel">{{ titleEn }}</h5>
-        <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
-      </div>
-      <div class="modal-body project-modal">
-        <p *ngIf="getLanguage() == 'pt_BR'">
-          {{ description }}
-        </p>
-        <p *ngIf="getLanguage() == 'en_US'">
-          {{ descriptionEn }}
-        </p>
-        <div *ngFor="let image of images; let i = index;">
-          <div class="zoom">
-            <img (click)="getImage(image.url)" class="posts images zoon-in" [src]="image.url" alt="" data-toggle="modal"
-              data-target=".modal-zoom" as="image">
-          </div>
+<ng-container *ngIf="!loading">
+  <div class="modal project-modal fade font-black" id="modalInformations" tabindex="-1" role="dialog"
+    aria-labelledby="modalInformationsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered project-modal modal-lg" role="document">
+      <div class="modal-content project-modal">
+        <div class="modal-header project-modal dark-blue-bg font-color">
+          <h5 class="modal-title" id="modalInformationsLabel">
+            <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseTitleEnglish">
+              {{ title }}
+            </ng-container>
+            <ng-template #elseTitleEnglish>
+              {{ titleEn }}
+            </ng-template>
+          </h5>
+          <em class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></em>
+        </div>
+        <div class="modal-body project-modal">
+          <p>
+            <ng-container *ngIf="getLanguage() == 'pt_BR'; else elseDescriptionEnglish">
+              {{ description }}
+            </ng-container>
+            <ng-template #elseDescriptionEnglish>
+              {{ descriptionEn }}
+            </ng-template>
+          </p>
+          <ng-container *ngFor="let image of images; let i = index;">
+            <div>
+              <div class="zoom">
+                <img (click)="getImage(image.url)" class="posts images zoon-in" [src]="image.url"
+                  alt="Imagem do projeto" data-toggle="modal" data-target=".modal-zoom">
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
 
 <!-- Modal image zoom -->
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -80,7 +97,7 @@
         <div class="modal-body zoom-modal">
           <div class="row">
             <div class="col-12 d-flex justify-content-center">
-              <img class="size zoon-out" [src]="image | notFoundImage" data-dismiss="modal" as="image">
+              <img class="size zoon-out" [src]="image | hasImage" data-dismiss="modal" alt="Imagem do projeto com zoom">
             </div>
           </div>
         </div>
@@ -88,5 +105,4 @@
     </div>
   </div>
 </div>
-
 <app-light-rounded></app-light-rounded>

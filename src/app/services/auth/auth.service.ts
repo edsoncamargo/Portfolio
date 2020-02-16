@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 
 // FIREBASE //
 import * as firebase from 'firebase';

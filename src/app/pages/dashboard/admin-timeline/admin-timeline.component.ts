@@ -22,16 +22,25 @@ export class AdminTimelineComponent implements OnInit {
   descriptionEn: string = null;
   fullPath: string = null;
   url: string = null;
+  urlEn: string = null;
   id: string = null;
   timeline: Timeline = null;
   timelines: Array<Timeline> = [];
 
   // Loadings
-  loading: boolean = true;
+  loading = true;
 
   // Modal
-  isEdit: boolean = false;
-  modalTitle: string = "Adicionar experiência";
+  isEdit = false;
+  modalTitle = 'Adicionar experiência';
+
+  // Timeline storage
+  fileToUpload: File = null;
+  fileName = '';
+  fileSuccess: any = null;
+
+  path = '';
+  // Timeline storage
 
   constructor(private timelineDaoService: TimelineService) { }
 
@@ -41,21 +50,21 @@ export class AdminTimelineComponent implements OnInit {
 
   changeModal(isEdit: boolean) {
     this.isEdit = isEdit;
-
-    if (isEdit == true) {
-      this.modalTitle = "Editar experiência";
+    if (isEdit === true) {
+      this.modalTitle = 'Editar experiência';
     } else {
-      this.modalTitle = "Adicionar experiência";
+      this.modalTitle = 'Adicionar experiência';
     }
   }
 
   add() {
-    this.timeline = new Timeline(this.date, this.dateEn, this.company, this.companyEn, this.description, this.descriptionEn, this.fullPath, this.url, this.id);
-    this.timelineDaoService.add(this.timeline);
+    this.timeline = new Timeline(this.date, this.dateEn, this.company, this.companyEn,
+      this.description, this.descriptionEn, this.fullPath, this.url, this.id);
+    this.timelineDaoService.add(this.timeline, this.fileToUpload);
   }
 
   list() {
-    this.timelineDaoService.list((timelines) => {
+    this.timelineDaoService.list((timelines: Array<Timeline>) => {
       this.timelines = timelines;
       this.loading = false;
     });
@@ -76,12 +85,18 @@ export class AdminTimelineComponent implements OnInit {
   }
 
   edit() {
-    this.timeline = new Timeline(this.date, this.dateEn, this.company, this.companyEn, this.description, this.descriptionEn, this.fullPath, this.url, this.id);
+    this.timeline = new Timeline(this.date, this.dateEn, this.company,
+      this.companyEn, this.description, this.descriptionEn, this.fullPath, this.url, this.id);
     this.timelineDaoService.edit(this.timeline);
   }
 
   delete() {
 
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.fileName = this.fileToUpload.name;
   }
 
 }

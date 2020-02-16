@@ -32,6 +32,9 @@ img {
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
     pointer-events: none;
+    height: 100%;
+    background-size: cover;
+    object-fit: fill;
 }
 
 @media only screen and (max-width: 767PX) {
@@ -41,7 +44,6 @@ img {
         border-bottom-right-radius: 0px;
     }
 }
-
 
 .hi {
     font-weight: 600;

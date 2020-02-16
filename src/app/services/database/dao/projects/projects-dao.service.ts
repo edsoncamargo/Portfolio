@@ -15,9 +15,9 @@ import { ProjectsStorageService } from 'src/app/services/storage/projects/projec
 export class ProjectsDaoService {
 
   // Paths
-  PROJECTS: string = "projects/";
-  IMAGES: string = "images/";
-  BR: string = "br/";
+  PROJECTS = 'projects/';
+  IMAGES = 'images/';
+  BR = 'br/';
 
   id: string = undefined;
 
@@ -25,12 +25,10 @@ export class ProjectsDaoService {
     private projectStorageService: ProjectsStorageService) {
   }
 
-  add(project: Project, onResolve) {
+  add(project: Project, onResolve: any) {
     project.parse();
-
     // Unique id
-    let id = this.db.database().push().key;
-
+    const id = this.db.database().push().key;
     // Setting portuguese
     this.db.database().child(this.PROJECTS).child(id).update({
       title: project.title,
@@ -41,22 +39,21 @@ export class ProjectsDaoService {
       fullPathCover: project.fullPathCover,
       id: id
     });
-
     onResolve(id);
   }
 
-  updateCover(fullPath: string, url: string, id: string, onResolve) {
+  updateCover(fullPath: string, url: string, id: string, onResolve: any) {
     this.db.database().child(this.PROJECTS).child(id).update({
       fullPathCover: fullPath,
       urlCover: url
     }).then(() => {
       onResolve(true);
-    })
+    });
   }
 
-  addImages(fullPath: string, project: string, url: string, onResolve) {
+  addImages(fullPath: string, project: string, url: string, onResolve: any) {
     // Unique id
-    let id = this.db.database().push().key;
+    const id = this.db.database().push().key;
     this.db.database().child(this.IMAGES).child(project).child(id).update({
       id: id,
       fullPath: fullPath,
@@ -66,31 +63,30 @@ export class ProjectsDaoService {
     })
   }
 
-  getProjects(onResolve) {
+  getProjects(onResolve: any) {
     this.db.database().child(this.PROJECTS).on('value', (snapshot) => {
-      let projects: Array<Project> = [];
-      let data = snapshot.val();
-
+      const projects: Array<Project> = [];
+      const data = snapshot.val();
       for (const id in data) {
-        projects.push(data[id]);
+        if (data.hasOwnProperty(id)) {
+          projects.push(data[id]);
+        }
       }
-
-      onResolve(projects)
+      onResolve(projects);
     });
   }
 
-  getPathImages(id: string, onResolve) {
+  getPathImages(id: string, onResolve: any) {
     this.db.database().child(this.IMAGES).child(`${id}/`).on('value', (snapshot) => {
-      let data = snapshot.val();
-      let images: Array<ProjectImage> = [];
-      let count: number = 0;
+      const data = snapshot.val();
+      const images: Array<ProjectImage> = [];
+      let count = 0;
 
       if (data != null) {
-        for (const id in data) {
-          if (id) {
-            images.push(data[id]);
+        for (const value in data) {
+          if (value) {
+            images.push(data[value]);
             count++;
-
             if (count >= Object.values(data).length) {
               onResolve(images);
             }
@@ -102,7 +98,7 @@ export class ProjectsDaoService {
     });
   }
 
-  edit(project: Project, onResolve) {
+  edit(project: Project, onResolve: any) {
     project.parse();
 
     this.db.database().child(this.PROJECTS).child(project.id).update({
@@ -118,7 +114,7 @@ export class ProjectsDaoService {
     });
   }
 
-  deleteImage(image: ProjectImage, id: string, onResolve) {
+  deleteImage(image: ProjectImage, id: string, onResolve: any) {
     this.db.database().child(this.IMAGES).child(`${id}/`).child(image.id).remove(() => {
       this.projectStorageService.deleteImage(image, (response: boolean) => {
         onResolve(response);
@@ -126,8 +122,8 @@ export class ProjectsDaoService {
     })
   }
 
-  deleteEverythingFromTheProject(project: Project, onResolve) {
-    this.projectStorageService.deleteEverythingFromTheProject(project, (response) => {
+  deleteEverythingFromTheProject(project: Project, onResolve: any) {
+    this.projectStorageService.deleteEverythingFromTheProject(project, (response: any) => {
       if (response == true) {
         this.db.database().child(this.PROJECTS).child(`${project.id}/`).remove().then(() => {
           this.db.database().child(this.IMAGES).child(`${project.id}/`).remove().then(() => {

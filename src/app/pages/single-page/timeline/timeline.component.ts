@@ -16,7 +16,7 @@ export class TimelineComponent implements OnInit {
 
   timelines: Array<Timeline> = [];
 
-  loading: boolean = true;
+  loading = true;
 
   language: string = null;
 
@@ -32,7 +32,7 @@ export class TimelineComponent implements OnInit {
   }
 
   list() {
-    this.timelineDaoService.list((timelines) => {
+    this.timelineDaoService.list((timelines: Array<Timeline>) => {
       this.timelines = timelines;
       this.loading = false;
     });

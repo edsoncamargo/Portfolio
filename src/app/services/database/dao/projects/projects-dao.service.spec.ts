@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { PostsDaoService } from './projects-dao.service';
+import { ProjectsDaoService } from './projects-dao.service';
 
 describe('PostsDaoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PostsDaoService]
+      providers: [ProjectsDaoService]
     });
   });
 
-  it('should be created', inject([PostsDaoService], (service: PostsDaoService) => {
+  it('should be created', inject([ProjectsDaoService], (service: ProjectsDaoService) => {
     expect(service).toBeTruthy();
   }));
 });

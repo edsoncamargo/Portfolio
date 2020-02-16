@@ -20,7 +20,7 @@
           </div>
           <div *ngIf="activeEdition == false" class="col-md-8">
             <div class="card-body">
-              <i (click)="activeAboutEdit()" class="fas fa-pen dark-blue cursor-pointer float-right tools"></i>
+              <em (click)="activeAboutEdit()" class="fas fa-pen dark-blue cursor-pointer float-right tools"></em>
               <div class="card-body">
                 <h1 [translate]="'about.hi_guys'" [translateParams]="{value: titleBR}" class="hi"></h1>
                 <br>
@@ -31,7 +31,7 @@
           </div>
           <div *ngIf="activeEdition == true" class="col-md-8">
             <div class="card-body">
-              <i (click)="activeAboutEdit()" class="fas fa-pencil-ruler cursor-pointer float-right tools"></i>
+              <em (click)="activeAboutEdit()" class="fas fa-pencil-ruler cursor-pointer float-right tools"></em>
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" id="pt-tab" data-toggle="tab" href="#pt" role="tab" aria-controls="pt"
@@ -50,7 +50,7 @@
                 <li class="nav-item">
                   <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
                     aria-selected="false">Foto de perfil &nbsp;&nbsp;
-                    <i class="fas fa-images"></i>
+                    <em class="fas fa-images"></em>
                   </a>
                 </li>
               </ul>

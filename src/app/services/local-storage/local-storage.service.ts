@@ -82,7 +82,7 @@ export class LocalStorageService {
   // AUTH //
 
   // AUTH ERROR //
-  setAuthError(error) {
+  setAuthError(error: any) {
     localStorage.setItem(this.AUTH_ERROR, error);
   }
 

@@ -12,7 +12,7 @@ declare let $: any;
 
 export class AdminMainComponent implements OnInit {
 
-  url: string = "";
+  url = '';
 
   constructor(private auth: AuthService, private router: Router) {
     this.url = this.router.url;
@@ -24,8 +24,8 @@ export class AdminMainComponent implements OnInit {
 
   toStartSidebar() {
     $(document).ready(function () {
-      $("#sidebar").mCustomScrollbar({
-        theme: "minimal"
+      $('#sidebar').mCustomScrollbar({
+        theme: 'minimal'
       });
 
       $('.dismiss, .overlay').on('click', function () {

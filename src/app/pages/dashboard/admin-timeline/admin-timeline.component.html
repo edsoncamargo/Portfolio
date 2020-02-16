@@ -5,31 +5,46 @@
       <hr class="line-title-white">
       <br>
     </div>
-    <div *ngIf="!loading" class="col-lg-3 col-md-4 col-sm-12">
-      <button (click)="changeModal(false)" class="btn" data-toggle="modal"
-        data-target="#addTimelineExperience">ADICIONAR
-        <i class="fas fa-plus icon"></i></button>
-    </div>
-  </div>
-  <br *ngIf="!loading">
-
-  <div *ngIf="loading" class="text-center">
-    <app-lds-facebook></app-lds-facebook>
-  </div>
-
-  <div *ngIf="!loading" class="row font-black">
-    <div class="col-12">
-      <div *ngFor="let timeline of timelines" class="card">
-        <div class="card-body">
-          <i (click)="getExperience(timeline.id)" class="far fa-trash-alt red cursor-pointer float-right tools"
-            data-toggle="modal" data-target="#addTimelineExperience"></i>
-          <i (click)="getExperience(timeline.id)" (click)="changeModal(true)" data-toggle="modal"
-            data-target="#addTimelineExperience" class="fas fa-pen dark-blue cursor-pointer float-right tools"></i>
-          <span>{{ timeline.date }} <br> {{ timeline.company }}</span>
-        </div>
+    <ng-container *ngIf="!loading">
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        <button (click)="changeModal(false)" class="btn" data-toggle="modal"
+          data-target="#addTimelineExperience">ADICIONAR
+          <em class="fas fa-plus icon"></em></button>
       </div>
-    </div>
+    </ng-container>
   </div>
+
+  <ng-container *ngIf="!loading">
+    <br>
+  </ng-container>
+
+  <ng-container *ngIf="loading; else elseLoading">
+    <div class="text-center">
+      <app-lds-facebook></app-lds-facebook>
+    </div>
+  </ng-container>
+  <ng-template #elseLoading>
+    <div class="row font-black">
+      <ng-container *ngFor="let timeline of timelines">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <em (click)="getExperience(timeline.id)" class="far fa-trash-alt red cursor-pointer float-right tools"
+                data-toggle="modal" data-target="#addTimelineExperience"></em>
+              <em (click)="getExperience(timeline.id)" (click)="changeModal(true)" data-toggle="modal"
+                data-target="#addTimelineExperience" class="fas fa-pen dark-blue cursor-pointer float-right tools"></em>
+              <div class="d-flex">
+                <img [src]="timeline.url | hasImage" class="company-img" alt="Imagem da empresa">
+                <span>{{ timeline.date }} <br> <strong>{{ timeline.company }}</strong> <br>
+                  {{ timeline.description }}</span>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
 
   <!-- Timeline add modal -->
   <div class="modal fade font-black" id="addTimelineExperience" tabindex="-1" role="dialog"
@@ -38,7 +53,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="addTimelineExperienceLabel">{{ modalTitle }}</h5>
-          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+          <em class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></em>
         </div>
 
         <div class="card-body">
@@ -46,21 +61,21 @@
             <li class="nav-item">
               <a class="nav-link active" id="pt-tab" data-toggle="tab" href="#pt" role="tab" aria-controls="pt"
                 aria-selected="true">
-                <img rel="preload" src="../../../assets/images/brasil.png" alt="" class="br-flag" as="image">
+                <img src="../../../assets/images/brasil.png" alt="" class="br-flag" as="image">
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" id="en-tab" data-toggle="tab" href="#en" role="tab" aria-controls="en"
                 aria-selected="false">
-                <img rel="preload" src="../../../assets/images/eua.png" alt="" class="eua-flag" as="image">
+                <img src="../../../assets/images/eua.png" alt="" class="eua-flag" as="image">
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" id="images-tab" data-toggle="tab" href="#image" role="tab" aria-controls="images"
                 aria-selected="false">Foto de perfil &nbsp;&nbsp;
-                <i class="fas fa-images"></i>
+                <em class="fas fa-images"></em>
               </a>
             </li>
           </ul>
@@ -82,6 +97,11 @@
                   <label>Descrição </label>
                   <input [(ngModel)]="description" [ngModelOptions]="{standalone: true}" type="text"
                     class="form-control input-modify" placeholder="Descrição">
+                </div>
+                <div class="form-group">
+                  <label>Url </label>
+                  <input [(ngModel)]="url" [ngModelOptions]="{standalone: true}" type="text"
+                    class="form-control input-modify" placeholder="Url">
                 </div>
               </form>
             </div>
@@ -105,24 +125,29 @@
                 </div>
               </form>
             </div>
-            <div class="tab-pane fade show" id="image" role="tabpanel" aria-labelledby="pt-tab">
-              <br>
+            <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="images-tab">
               <form>
-                <div class="form-group">
-                  <label>Imagem da empresa </label>
-                  <input [(ngModel)]="companyImage" [ngModelOptions]="{standalone: true}" type="file"
-                    class="form-control input-modify">
+                <br>
+                <div class="custom-file">
+                  <input (change)="handleFileInput($event.target.files)" type="file" class="custom-file-input"
+                    id="customFile">
+                  <label class="custom-file-label" for="customFile">
+                    <small *ngIf="fileToUpload">{{ fileName }}</small></label>
                 </div>
               </form>
             </div>
           </div>
         </div>
-        <div *ngIf="!isEdit" class="modal-footer">
-          <button (click)="add()" type="button" class="btn" data-dismiss="modal">ADICIONAR</button>
-        </div>
-        <div *ngIf="isEdit" class="modal-footer">
-          <button (click)="edit()" type="button" class="btn" data-dismiss="modal">SALVAR</button>
-        </div>
+        <ng-container *ngIf="!isEdit; else elseEdit">
+          <div class="modal-footer">
+            <button (click)="add()" type="button" class="btn" data-dismiss="modal">ADICIONAR</button>
+          </div>
+        </ng-container>
+        <ng-template #elseEdit>
+          <div class="modal-footer">
+            <button (click)="edit()" type="button" class="btn" data-dismiss="modal">SALVAR</button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

@@ -15,9 +15,4 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  complete() {
-    $(".title").removeClass("hidden");
-    $(".title").addClass("tracking-in-contract-bck");
-  }
-
 }

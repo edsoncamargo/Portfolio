@@ -4,25 +4,23 @@ import * as firebase from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
-export class AboutStorageService {
+export class TimelineStorageService {
 
   // Storage reference
   storage = firebase.storage().ref();
 
   // Paths
-  ABOUT = 'about/';
-  PROFILE_PIC = 'profile/';
-  ME = 'me';
+  COMPANY = 'company/';
 
   constructor() { }
 
-  addMyProfilePic(file: File, onResolve: any) {
-    this.storage.child(this.ABOUT + this.PROFILE_PIC + this.ME).put(file).then((snapshot) => {
+  addCompanyPic(file: File, id: string, onResolve: any) {
+    this.storage.child(this.COMPANY + id.concat('/') + file.name).put(file).then((snapshot) => {
       onResolve(snapshot);
     });
   }
 
-  getProfilePic(path: string, onResolve: any) {
+  getCompanyPic(path: string, onResolve: any) {
     this.storage.child(path).getDownloadURL().then((url) => {
       onResolve(url);
     });

@@ -30,9 +30,9 @@ export class AdminProjectsComponent implements OnInit {
   // ========================================== //
 
   // Project image variables
-  fullPaths: Array<String> = [];
+  fullPaths: Array<string> = [];
   images: Array<ProjectImage> = [];
-  urlCover: string = "";
+  urlCover = '';
   // Project image variables
 
   // Storage
@@ -48,12 +48,12 @@ export class AdminProjectsComponent implements OnInit {
   // Get projects variables
 
   // Edit 
-  isEdit: boolean = false;
+  isEdit = false;
   project: Project = null;
 
   // Loadings
-  loading: boolean = true;
-  modalLoading: boolean = false;
+  loading = true;
+  modalLoading = false;
 
   previousCover: any = null;
   previousImages: any[] = [];
@@ -74,21 +74,23 @@ export class AdminProjectsComponent implements OnInit {
 
   // Add and update
   add() {
-    let project: Project = new Project(this.title, this.description, this.url, this.fullPathCover, undefined, undefined, this.titleEn, this.descriptionEn);
+    const project: Project = new Project(this.title, this.description, this.url,
+      this.fullPathCover, undefined, undefined, this.titleEn, this.descriptionEn);
 
     this.projectsDaoService.add(project, ((id: string) => {
-      this.uploadFileToActivity(id, (response) => {
-        if (response == true)
+      this.uploadFileToActivity(id, (response: any) => {
+        if (response === true) {
           this.uploadFilesToActivity(id);
+        }
       });
     }));
   }
 
   handleFileInput(event: any) {
-    let file: FileList = event.target.files;
+    const file: FileList = event.target.files;
     this.file = file.item(0);
 
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsDataURL(this.file);
     reader.onload = (_event) => {
       this.previousCover = reader.result;
@@ -98,23 +100,23 @@ export class AdminProjectsComponent implements OnInit {
   removeCover() {
     this.file = null;
     this.previousCover = null;
-    $(".cover").val('');
+    $('.cover').val('');
   }
 
   removeImage(i: number) {
     this.previousImages.splice(i, 1);
     this.files.splice(i, 1);
-    if (this.previousImages.length == 0) {
+    if (this.previousImages.length === 0) {
       this.previousImages = [];
       this.files = [];
-      $(".projects").val('');
+      $('.projects').val('');
     }
   }
 
-  uploadFileToActivity(id: string, onResolve) {
+  uploadFileToActivity(id: string, onResolve: any) {
     if (this.file) {
-      this.projectsStorageService.addCover(this.file, id, (fullPath, url) => {
-        this.projectsDaoService.updateCover(fullPath, url, id, (response) => {
+      this.projectsStorageService.addCover(this.file, id, (fullPath: string, url: string) => {
+        this.projectsDaoService.updateCover(fullPath, url, id, (response: any) => {
           onResolve(response);
         });
       });
@@ -140,8 +142,8 @@ export class AdminProjectsComponent implements OnInit {
 
   uploadFilesToActivity(id: string) {
     if (this.files.length > 0) {
-      this.projectsStorageService.add(this.files, id, (fullPath, url) => {
-        this.projectsDaoService.addImages(fullPath, id, url, (response) => {
+      this.projectsStorageService.add(this.files, id, (fullPath: string, url: string) => {
+        this.projectsDaoService.addImages(fullPath, id, url, (response: any) => {
           if (response == true) {
             this.modalLoading = false;
             this.cleanObject();
@@ -198,9 +200,9 @@ export class AdminProjectsComponent implements OnInit {
     this.project = new Project
       (this.title, this.description, this.url, this.fullPathCover, this.id, this.images, this.titleEn, this.descriptionEn, this.urlCover);
 
-    this.projectsDaoService.edit(this.project, (response) => {
-      if (response == true) {
-        this.uploadFileToActivity(this.id, (response) => {
+    this.projectsDaoService.edit(this.project, (isEdited: any) => {
+      if (isEdited == true) {
+        this.uploadFileToActivity(this.id, (response: any) => {
           if (response == true) {
             this.uploadFilesToActivity(this.id);
           }
@@ -221,7 +223,7 @@ export class AdminProjectsComponent implements OnInit {
   deleteProject() {
     this.modalLoading = true;
 
-    this.projectsDaoService.deleteEverythingFromTheProject(this.project, (response) => {
+    this.projectsDaoService.deleteEverythingFromTheProject(this.project, (response: any) => {
       if (response) {
         this.cleanFiles();
         this.modalLoading = false;
@@ -230,15 +232,16 @@ export class AdminProjectsComponent implements OnInit {
   }
 
   cleanObject() {
-    if (this.project != null)
+    if (this.project != null) {
       this.project.reset();
+    }
   }
 
   cleanFiles() {
     this.file = null;
     this.files = [];
-    $(".file").val('');
-    $(".file").val('');
+    $('.file').val('');
+    $('.file').val('');
     this.previousCover = null;
     this.previousImages = [];
   }

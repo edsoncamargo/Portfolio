@@ -6,8 +6,8 @@
       <br>
     </div>
     <div *ngIf="!loading" class="col-lg-3 col-md-4 col-sm-12">
-      <button (click)="changeEdit(false)" class="btn" data-toggle="modal" data-target="#projectModal">ADICIONAR <i
-          class="fas fa-plus plus"></i></button>
+      <button (click)="changeEdit(false)" class="btn" data-toggle="modal" data-target="#projectModal">ADICIONAR <em
+          class="fas fa-plus plus"></em></button>
     </div>
   </div>
 
@@ -25,12 +25,12 @@
               {{ project.title }}
             </div>
             <div class="col-6">
-              <i (click)="getProject(project, false)"
+              <em (click)="getProject(project, false)"
                 class="far fa-trash-alt tools red cursor-pointer jello-horizontal float-right" data-toggle="modal"
-                data-target=".bd-example-modal-sm"></i>
-              <i (click)="getProject(project, true)"
+                data-target=".bd-example-modal-sm"></em>
+              <em (click)="getProject(project, true)"
                 class="fas fa-pen tools margin-right dark-blue cursor-pointer jello-horizontal float-right"
-                data-toggle="modal" data-target="#projectModal"></i>
+                data-toggle="modal" data-target="#projectModal"></em>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
         <div class="modal-header">
           <h5 *ngIf="!isEdit" class="modal-title" id="projectModal">Adicionar</h5>
           <h5 *ngIf="isEdit" class="modal-title" id="projectModal">Editar {{ title }}</h5>
-          <i class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></i>
+          <em class="fas fa-times close-modal cursor-pointer" data-dismiss="modal"></em>
         </div>
 
         <div class="modal-body">
@@ -70,14 +70,14 @@
             <li class="nav-item">
               <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
                 aria-selected="false">Imagens &nbsp;&nbsp;
-                <i class="fas fa-images"></i>
+                <em class="fas fa-images"></em>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="link"
                 aria-selected="false">Link &nbsp;&nbsp;
-                <i class="fas fa-link"></i>
+                <em class="fas fa-link"></em>
               </a>
             </li>
           </ul>
@@ -121,8 +121,8 @@
                     placeholder="Capa">
                   <div *ngIf="file">
                     <br>
-                    <i (click)="removeCover()"
-                      class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></i>
+                    <em (click)="removeCover()"
+                      class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></em>
                     <img rel="preload" [src]="previousCover" alt="" class="posts images cursor-pointer" as="image">
                     <hr class="image-div">
                   </div>
@@ -136,8 +136,8 @@
                     <br>
                     <label for="">Preview</label>
                     <div *ngFor="let image of previousImages; let i = index;">
-                      <i (click)="removeImage(i)"
-                        class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></i>
+                      <em (click)="removeImage(i)"
+                        class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></em>
                       <img rel="preload" class="posts images cursor-pointer projects" [src]="image" alt="" as="image">
                     </div>
                     <hr class="image-div">
@@ -149,8 +149,8 @@
                 <div *ngIf="images && images.length > 0" class="form-groug">
                   <label>Imagens armazenadas</label>
                   <div *ngFor="let image of images; let i = index;">
-                    <i (click)="deleteImage(image, i)"
-                      class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></i>
+                    <em (click)="deleteImage(image, i)"
+                      class="far fa-trash-alt red cursor-pointer float-right tools icon-shadow delete-image"></em>
                     <img rel="preload" class="posts images cursor-pointer" [src]="image.url" alt="" as="image">
                   </div>
                 </div>
